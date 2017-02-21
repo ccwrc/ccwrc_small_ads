@@ -1,6 +1,6 @@
 <?php
 
-namespace smallAdsBundle\Tests\Controller;
+namespace SmallAdsBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

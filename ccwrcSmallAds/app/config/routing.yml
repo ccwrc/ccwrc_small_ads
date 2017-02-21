@@ -1,5 +1,5 @@
 small_ads:
-    resource: "@smallAdsBundle/Controller/"
+    resource: "@SmallAdsBundle/Controller/"
     type:     annotation
     prefix:   /
 
