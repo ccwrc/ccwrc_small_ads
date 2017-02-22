@@ -29,9 +29,8 @@ class Photo
     private $path;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="smallAd", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="SmallAd", inversedBy="photos")
+     * @ORM\JoinColumn(name="smallAd_id", referencedColumnName="id", nullable=true)
      */
     private $smallAd;
 

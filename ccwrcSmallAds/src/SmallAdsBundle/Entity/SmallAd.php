@@ -36,9 +36,7 @@ class SmallAd
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="photos", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Photo", mappedBy="smallAd", cascade={"remove"})
      */
     private $photos;
 
