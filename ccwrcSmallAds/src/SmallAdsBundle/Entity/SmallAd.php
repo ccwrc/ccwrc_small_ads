@@ -69,6 +69,12 @@ class SmallAd
      * @ORM\Column(name="comments", type="string", length=255)
      */
     private $comments;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="smallAds")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     */
+    private $user;
 
 
     /**

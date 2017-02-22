@@ -27,16 +27,12 @@ class User extends BaseUser {
     protected $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="smallAds", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="SmallAd", mappedBy="user", cascade={"remove"})
      */
     private $smallAds;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="comments", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"remove"})
      */
     private $comments;
 
