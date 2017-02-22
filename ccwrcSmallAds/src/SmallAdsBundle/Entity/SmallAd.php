@@ -55,9 +55,8 @@ class SmallAd
     private $endDate;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="categories", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="smallAds", cascade={"persist"})
+     * @ORM\JoinTable(name="category_smallad")
      */
     private $categories;
 

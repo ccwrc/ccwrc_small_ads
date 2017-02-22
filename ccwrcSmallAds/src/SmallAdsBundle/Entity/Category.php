@@ -29,9 +29,7 @@ class Category
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="smallAds", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="SmallAd", mappedBy="categories")
      */
     private $smallAds;
 
