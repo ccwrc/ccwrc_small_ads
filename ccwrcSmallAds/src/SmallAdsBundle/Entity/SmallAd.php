@@ -61,9 +61,7 @@ class SmallAd
     private $categories;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="comments", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="smallAd", cascade={"remove"})
      */
     private $comments;
     

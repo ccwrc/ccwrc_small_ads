@@ -42,9 +42,8 @@ class Comment
     private $user;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="smallAd", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="SmallAd", inversedBy="comments")
+     * @ORM\JoinColumn(name="smallad_id", referencedColumnName="id", nullable=false)
      */
     private $smallAd;
 
