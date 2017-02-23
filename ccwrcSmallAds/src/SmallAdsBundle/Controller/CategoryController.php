@@ -41,13 +41,32 @@ class CategoryController extends Controller {
     }
 
     /**
-     * @Route("/edit")
+     * @Route("/{id}/edit", requirements={"id"="\d+"})
      */
-    public function editAction() {
-        //
-        
+    public function editAction(Request $req, $id) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Dostęp zabroniony');
+        $category = $this->getDoctrine()->getRepository("SmallAdsBundle:Category")->find($id);
+
+        if ($category == null) {
+            throw $this->createNotFoundException("Brak ID w bazie");
+        }
+
+        $form = $this->createFormBuilder($category)
+                ->setMethod("POST")
+                ->add("name", "text", ["label" => "Edytuj nazwę kategorii"])
+                ->add("save", "submit", ["label" => "Zapisz"])
+                ->getForm();
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("smallads_category_showall");
+        }
+
         return $this->render('SmallAdsBundle:Category:edit.html.twig', array(
-            // ...
+                    "form" => $form->createView()
         ));
     }
 
