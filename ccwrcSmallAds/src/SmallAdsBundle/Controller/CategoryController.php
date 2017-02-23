@@ -32,9 +32,7 @@ class CategoryController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
-            return $this->redirectToRoute("smallads_category_showall", [
-                            //
-            ]);
+            return $this->redirectToRoute("smallads_category_showall");
         }
 
         return $this->render('SmallAdsBundle:Category:create.html.twig', array(
