@@ -27,9 +27,9 @@ class SmallAdController extends Controller {
                 ->setMethod("POST")
                 ->add("title", "text", ["label" => "Podaj tytuł: "])
                 ->add("description", "textarea", ["label" => "Dodaj opis: "])
-//                ->add("categories", EntityType::class, [
-//                    "class" => "SmallAdsBundle:Category", "choice_label" => "name",
-//                    "label" => "Wybierz kategorię: "])
+                ->add("categories", EntityType::class, [
+                    "class" => "SmallAdsBundle:Category", "choice_label" => "name",
+                    "label" => "Wybierz kategorię: "])
                 ->add("photos", "file", ["label" => "Wgraj foto (pliki: .jpg, .png)",
                     "data_class" => null,
                     "required" => false])
@@ -38,7 +38,7 @@ class SmallAdController extends Controller {
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $smallAd = $form->getData();
+            $smallAd = $form->getData();  // var_dump($smallAd); exit;
             $smallAd->setUser($user);
             $smallAd->setStartDate(new dateTime());
             $smallAd->setEndDate(new dateTime(date("Y-m-d H:i:s", time()+3600*24*7)));

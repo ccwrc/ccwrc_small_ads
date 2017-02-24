@@ -4,6 +4,8 @@ namespace SmallAdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraint as Assert;
+
 /**
  * SmallAd
  *
@@ -210,16 +212,23 @@ class SmallAd {
     /**
      * Set categories
      *
-     * @param string $categories
+     * @param \SmallAdsBundle\Entity\Category $categories
      * @return SmallAd
      */
-    public function setCategories($categories)
+    public function setCategories(\SmallAdsBundle\Entity\Category $categories)
     {
-        $this->categories = $categories;
+        $this->categories[] = $categories;
 
         return $this;
     }
 
+//        public function setCategories($categories)
+//    {
+//        $this->categories = $categories;
+//
+//        return $this;
+//    }
+    
     /**
      * Get categories
      *
