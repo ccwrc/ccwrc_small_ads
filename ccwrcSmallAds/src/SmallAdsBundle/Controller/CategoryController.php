@@ -93,14 +93,21 @@ class CategoryController extends Controller {
     }
 
     /**
-     * @Route("/delete")
+     * @Route("/{id}/delete", requirements={"id"="\d+"})
      */
-    public function deleteAction() {
-        //
+    public function deleteAction($id) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Dostęp zabroniony');
+        $category = $this->getDoctrine()->getRepository("SmallAdsBundle:Category")->find($id);
+
+        if ($category == null) {
+            throw $this->createNotFoundException("Brak ID w bazie");
+        }
         
-        return $this->render('SmallAdsBundle:Category:delete.html.twig', array(
-            // ...
-        ));
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($category);
+        $em->flush();
+
+        return $this->redirectToRoute("smallads_category_showall");
     }
 
 }
