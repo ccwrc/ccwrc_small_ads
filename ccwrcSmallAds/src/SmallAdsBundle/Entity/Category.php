@@ -115,8 +115,12 @@ class Category
      *
      * @param \SmallAdsBundle\Entity\SmallAd $smallAds
      */
-    public function removeSmallAd(\SmallAdsBundle\Entity\SmallAd $smallAds)
-    {
+    public function removeSmallAd(\SmallAdsBundle\Entity\SmallAd $smallAds) {
         $this->smallAds->removeElement($smallAds);
     }
+
+    public function __toString() {
+        return (string)$this->name;
+    }
+
 }

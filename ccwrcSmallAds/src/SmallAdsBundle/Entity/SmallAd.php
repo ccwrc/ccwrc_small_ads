@@ -10,8 +10,18 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="small_ad")
  * @ORM\Entity(repositoryClass="SmallAdsBundle\Repository\SmallAdRepository")
  */
-class SmallAd
-{
+class SmallAd {
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * @var int
      *
@@ -242,15 +252,6 @@ class SmallAd
     {
         return $this->comments;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add photos
@@ -343,4 +344,5 @@ class SmallAd
     {
         return $this->user;
     }
+
 }
