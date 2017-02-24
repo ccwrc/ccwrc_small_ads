@@ -85,10 +85,10 @@ class CategoryController extends Controller {
      * @Route("/showAll")
      */
     public function showAllAction() {
-        //
+        $categories = $this->getDoctrine()->getRepository("SmallAdsBundle:Category")->findAll();
 
         return $this->render('SmallAdsBundle:Category:show_all.html.twig', array(
-                        // ...
+                    "categories" => $categories
         ));
     }
 
