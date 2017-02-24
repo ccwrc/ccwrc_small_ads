@@ -3,5 +3,8 @@
 {% block title %}SmallAdsBundle:Category:show{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Category:show page</h1>
+
+    {% include 'SmallAdsBundle:Category:admin_menu.html.twig' %}
+    <h1>Welcome to the Category:show page</h1>
+    
 {% endblock %}

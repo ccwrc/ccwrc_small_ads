@@ -12,7 +12,7 @@ use SmallAdsBundle\Entity\Category;
  * @Route("/category")
  */
 class CategoryController extends Controller {
-    
+
     /**
      * @Route("/create")
      */
@@ -75,16 +75,17 @@ class CategoryController extends Controller {
      */
     public function showAction() {
         //
-        
+
         return $this->render('SmallAdsBundle:Category:show.html.twig', array(
-            // ...
+                        // ...
         ));
     }
-    
+
     /**
      * @Route("/showAll")
      */
     public function showAllAction() {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Dostęp zabroniony');
         $categories = $this->getDoctrine()->getRepository("SmallAdsBundle:Category")->findAll();
 
         return $this->render('SmallAdsBundle:Category:show_all.html.twig', array(
@@ -102,7 +103,7 @@ class CategoryController extends Controller {
         if ($category == null) {
             throw $this->createNotFoundException("Brak ID w bazie");
         }
-        
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($category);
         $em->flush();

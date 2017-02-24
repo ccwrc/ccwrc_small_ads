@@ -3,6 +3,8 @@
 {% block title %}SmallAdsBundle:Category:edit{% endblock %}
 
 {% block body %}
+
+    {% include 'SmallAdsBundle:Category:admin_menu.html.twig' %}
     <h1>Welcome to the Category:edit page</h1>
 
     {{ form_start(form) }}
