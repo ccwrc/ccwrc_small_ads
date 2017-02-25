@@ -3,5 +3,20 @@
 {% block title %}SmallAdsBundle:Category:showAllCategories{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Category:showAllCategories page</h1>
+
+    <h1>Welcome to the Category:showAllCategories page</h1>
+
+    <ul>
+        {% for category in categories %}
+            <li>
+                ID:  {{ category.id }}, Nazwa: {{ category.name }}, Ilość ogłoszeń: 
+                {{ category.ads | length }} <br/>
+                <a href="{{ path("smallads_category_editcategory", {"id":category.id}) }}">Edytuj</a> 
+                <a href="{{ path("smallads_category_deletecategory", {"id":category.id}) }}">Usuń</a> <br/><br/>
+            </li>   
+        {% else %}
+            Brak zapisanych kategorii
+        {% endfor %}
+    </ul>
+
 {% endblock %}
