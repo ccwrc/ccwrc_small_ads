@@ -3,5 +3,11 @@
 {% block title %}SmallAdsBundle:SmallAd:edit{% endblock %}
 
 {% block body %}
-<h1>Welcome to the SmallAd:edit page</h1>
+    
+    <h1>Welcome to the SmallAd:edit page</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
 {% endblock %}

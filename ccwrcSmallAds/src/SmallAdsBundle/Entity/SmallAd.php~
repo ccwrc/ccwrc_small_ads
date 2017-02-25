@@ -4,8 +4,6 @@ namespace SmallAdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use Symfony\Component\Validator\Constraint as Assert;
-
 /**
  * SmallAd
  *
@@ -48,6 +46,7 @@ class SmallAd {
     private $description;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
      * @ORM\OneToMany(targetEntity="Photo", mappedBy="smallAd", cascade={"persist","remove"})
      */
     private $photos;

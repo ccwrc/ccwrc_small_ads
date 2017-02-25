@@ -46,7 +46,7 @@ class SmallAd {
     private $description;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @ORM\OneToMany(targetEntity="Photo", mappedBy="smallAd", cascade={"persist","remove"})
      */
     private $photos;

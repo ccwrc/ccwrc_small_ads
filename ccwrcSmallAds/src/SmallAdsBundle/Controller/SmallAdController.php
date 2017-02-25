@@ -53,7 +53,7 @@ class SmallAdController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($smallAd);
             $em->flush();
-            return $this->redirectToRoute("smallads_smallad_show");
+            return $this->redirectToRoute("smallads_smallad_showall");
         }
 
         return $this->render('SmallAdsBundle:SmallAd:create.html.twig', array(
@@ -62,11 +62,48 @@ class SmallAdController extends Controller {
     }
 
     /**
-     * @Route("/edit")
+     * @Route("/{id}/edit")
      */
-    public function editAction() {
+    public function editAction(Request $req, $id) {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
+        $user = $this->container->get("security.context")->getToken()->getUser();
+        $smallAd = $this->getDoctrine()->getRepository("SmallAdsBundle:SmallAd")->find($id);
+        $smallAdUser = $smallAd->getUser();
+        
+        if ($user != $smallAdUser) {
+            throw $this->createNotFoundException("Brak uprawnień do edycji");
+        }
+
+        $form = $this->createFormBuilder($smallAd)
+                ->setMethod("POST")
+                ->add("title", "text", ["label" => "Podaj tytuł: "])
+                ->add("description", "textarea", ["label" => "Dodaj opis: "])
+                ->add("categories", EntityType::class, [
+                    "class" => "SmallAdsBundle:Category", "choice_label" => "name",
+                    "label" => "Wybierz kategorię: "])
+                ->add("photos", "file", ["label" => "Wgraj foto (pliki: .jpg, .png)",
+                    "data_class" => null,
+                    "required" => false])
+                ->add("save", "submit", ["label" => "Zapisz edycję"])
+                ->getForm();
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $smallAd = $form->getData();
+            $photos = $smallAd->getPhotos();
+            if ($photos) {
+                $photoName = date("YmdHis") . mt_rand(1, 9000) . "." . $photos->guessExtension();
+                $photos->move($this->getParameter('img_directory'), $photoName);
+                $smallAd->setPhotos($photoName);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("smallads_smallad_showall");
+        }
+
         return $this->render('SmallAdsBundle:SmallAd:edit.html.twig', array(
-                        // ...
+                    "form" => $form->createView()
         ));
     }
 
