@@ -13,12 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser {
     
-    public function __construct() {
-        parent::__construct();
-        
-        $this->ads = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+//    public function __construct() {
+//        parent::__construct();
+//    }
 
 
     /**
