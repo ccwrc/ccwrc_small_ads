@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2017 at 09:26 PM
+-- Generation Time: Feb 25, 2017 at 12:28 PM
 -- Server version: 5.7.17-0ubuntu0.16.04.1
--- PHP Version: 7.0.13-0ubuntu0.16.04.1
+-- PHP Version: 7.0.15-0ubuntu0.16.04.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -31,6 +31,18 @@ CREATE TABLE `category` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(3, 'Koty i chomiki'),
+(4, 'Plany podboju świata'),
+(5, 'Gołębie pocztowe'),
+(6, 'Jednorożce'),
+(7, 'Komputery 8-bit'),
+(8, 'Testowa');
+
 -- --------------------------------------------------------
 
 --
@@ -41,6 +53,14 @@ CREATE TABLE `category_smallad` (
   `small_ad_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `category_smallad`
+--
+
+INSERT INTO `category_smallad` (`small_ad_id`, `category_id`) VALUES
+(8, 6),
+(9, 8);
 
 -- --------------------------------------------------------
 
@@ -82,8 +102,9 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@ccwrcuser.pl', 'ccwrcuser@ccwrcuser.pl', 1, NULL, '$2y$13$nmC3AvQ7tg0Wqo/doAC4nOPUBRP8KDNqTVL6mYuSCC0ccc4SH5BAS', '2017-02-22 21:22:01', NULL, NULL, 'a:0:{}'),
-(2, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@ccwrcadmin.pl', 'ccwrcadmin@ccwrcadmin.pl', 1, NULL, '$2y$13$.cxRMaK7FDQ5E3pX2PvGEOMPSS137rjp9Pa3DdDAFE8FhAPFf0Y6e', '2017-02-22 21:25:34', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}');
+(1, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@ccwrcuser.pl', 'ccwrcuser@ccwrcuser.pl', 1, NULL, '$2y$13$nmC3AvQ7tg0Wqo/doAC4nOPUBRP8KDNqTVL6mYuSCC0ccc4SH5BAS', '2017-02-24 16:37:39', 'MQ6V0VUDxSUFDPrj8dRNqZCVvPd-2dcuivtW5LsPuKI', '2017-02-23 15:18:29', 'a:0:{}'),
+(2, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@ccwrcadmin.pl', 'ccwrcadmin@ccwrcadmin.pl', 1, NULL, '$2y$13$.cxRMaK7FDQ5E3pX2PvGEOMPSS137rjp9Pa3DdDAFE8FhAPFf0Y6e', '2017-02-24 12:49:25', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(3, 'ccwrcltd', 'ccwrcltd', 'ccwrcltd@pl.ccwrcltd', 'ccwrcltd@pl.ccwrcltd', 1, NULL, '$2y$13$t1/aha1tM1XaYxaG94AWn.94sHyUuyHx66vBAiVJygjmPSg6r1Tqu', '2017-02-23 15:21:10', 'uX0Nu9OgbBkF30ANeRljg3e2TTEzxwppw7c7DDLqluQ', '2017-02-23 15:21:35', 'a:0:{}');
 
 -- --------------------------------------------------------
 
@@ -111,6 +132,21 @@ CREATE TABLE `small_ad` (
   `startDate` datetime NOT NULL,
   `endDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `small_ad`
+--
+
+INSERT INTO `small_ad` (`id`, `user_id`, `title`, `description`, `startDate`, `endDate`) VALUES
+(1, 1, 'xcdcfd', 'dfgdfgdfg', '2017-02-01 00:00:00', '2017-02-14 00:00:00'),
+(2, 1, 'esgr', 'sdfsdf', '2017-02-24 17:19:04', '2017-02-24 17:19:04'),
+(3, 1, 'esgr', 'sdfsdf', '2017-02-24 17:21:05', '2017-02-24 17:21:05'),
+(4, 1, 'esgr', 'sdfsdf', '2017-02-24 17:21:33', '2017-02-24 17:21:56'),
+(5, 1, 'esgr', 'sdfsdf', '2017-02-24 17:22:17', '2017-02-24 18:22:17'),
+(6, 1, 'esgr', 'sdfsdf', '2017-02-24 17:22:53', '2017-03-03 17:22:53'),
+(7, 1, 'esgr', 'sdfsdf', '2017-02-24 17:23:49', '2017-03-03 17:23:49'),
+(8, 1, 'esgr', 'sdfsdf', '2017-02-24 18:09:31', '2017-03-03 18:09:31'),
+(9, 1, 'esgr33434', 'sdfsdf34343434', '2017-02-24 18:11:36', '2017-03-03 18:11:36');
 
 --
 -- Indexes for dumped tables
@@ -169,7 +205,7 @@ ALTER TABLE `small_ad`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `comment`
 --
@@ -179,7 +215,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `fos_user`
 --
 ALTER TABLE `fos_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `photo`
 --
@@ -189,7 +225,7 @@ ALTER TABLE `photo`
 -- AUTO_INCREMENT for table `small_ad`
 --
 ALTER TABLE `small_ad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --
