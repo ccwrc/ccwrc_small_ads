@@ -3,5 +3,11 @@
 {% block title %}SmallAdsBundle:SmallAd:show{% endblock %}
 
 {% block body %}
-<h1>Welcome to the SmallAd:show page</h1>
+    <h1>Welcome to the SmallAd:show page</h1>
+
+    Tytuł: {{ smallAd.title }} <br/>
+    Opis: {{ smallAd.description }} <br/>
+    Zdjęcie: <br/>
+    <img src="{{ asset('/bundles/SmallAdsBundle/img/' ~ smallAd.photos) }}">
+
 {% endblock %}

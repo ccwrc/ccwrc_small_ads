@@ -6,8 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use SmallAdsBundle\Entity\SmallAd;
 use \DateTime;
+
+use SmallAdsBundle\Entity\SmallAd;
 
 /**
  * @Route("/ads")
@@ -18,6 +19,7 @@ class SmallAdController extends Controller {
      * @Route("/create")
      */
     public function createAction(Request $req) {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
         $user = $this->container->get("security.context")->getToken()->getUser();
         $smallAd = new SmallAd();
 
@@ -69,11 +71,13 @@ class SmallAdController extends Controller {
     }
 
     /**
-     * @Route("/show")
+     * @Route("/{id}/show")
      */
-    public function showAction() {
+    public function showAction($id) {
+        $smallAd = $this->getDoctrine()->getRepository("SmallAdsBundle:SmallAd")->find($id);
+
         return $this->render('SmallAdsBundle:SmallAd:show.html.twig', array(
-                        // ...
+                    "smallAd" => $smallAd
         ));
     }
 
