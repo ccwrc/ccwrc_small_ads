@@ -5,4 +5,3 @@ small_ads:
     
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"    
-

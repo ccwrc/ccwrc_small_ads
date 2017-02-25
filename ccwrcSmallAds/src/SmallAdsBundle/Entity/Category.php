@@ -24,14 +24,9 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="SmallAd", mappedBy="categories")
-     */
-    private $smallAds;
 
 
     /**
@@ -66,61 +61,4 @@ class Category
     {
         return $this->name;
     }
-
-    /**
-     * Set smallAds
-     *
-     * @param string $smallAds
-     * @return Category
-     */
-    public function setSmallAds($smallAds)
-    {
-        $this->smallAds = $smallAds;
-
-        return $this;
-    }
-
-    /**
-     * Get smallAds
-     *
-     * @return string 
-     */
-    public function getSmallAds()
-    {
-        return $this->smallAds;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->smallAds = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add smallAds
-     *
-     * @param \SmallAdsBundle\Entity\SmallAd $smallAds
-     * @return Category
-     */
-    public function addSmallAd(\SmallAdsBundle\Entity\SmallAd $smallAds)
-    {
-        $this->smallAds[] = $smallAds;
-
-        return $this;
-    }
-
-    /**
-     * Remove smallAds
-     *
-     * @param \SmallAdsBundle\Entity\SmallAd $smallAds
-     */
-    public function removeSmallAd(\SmallAdsBundle\Entity\SmallAd $smallAds) {
-        $this->smallAds->removeElement($smallAds);
-    }
-
-    public function __toString() {
-        return (string)$this->name;
-    }
-
 }

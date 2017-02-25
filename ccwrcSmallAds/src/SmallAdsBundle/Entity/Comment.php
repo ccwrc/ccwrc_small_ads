@@ -35,18 +35,6 @@ class Comment
      */
     private $text;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
-     */
-    private $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="SmallAd", inversedBy="comments")
-     * @ORM\JoinColumn(name="smallad_id", referencedColumnName="id", nullable=false)
-     */
-    private $smallAd;
-
 
     /**
      * Get id
@@ -102,51 +90,5 @@ class Comment
     public function getText()
     {
         return $this->text;
-    }
-
-    /**
-     * Set user
-     *
-     * @param string $user
-     * @return Comment
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return string 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set smallAd
-     *
-     * @param string $smallAd
-     * @return Comment
-     */
-    public function setSmallAd($smallAd)
-    {
-        $this->smallAd = $smallAd;
-
-        return $this;
-    }
-
-    /**
-     * Get smallAd
-     *
-     * @return string 
-     */
-    public function getSmallAd()
-    {
-        return $this->smallAd;
     }
 }
