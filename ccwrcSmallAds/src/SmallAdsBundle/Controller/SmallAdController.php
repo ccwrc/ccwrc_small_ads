@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
 use SmallAdsBundle\Entity\SmallAd;
 use \DateTime;
 
@@ -14,7 +13,7 @@ use \DateTime;
  * @Route("/ads")
  */
 class SmallAdController extends Controller {
-    
+
     /**
      * @Route("/create")
      */
@@ -41,10 +40,10 @@ class SmallAdController extends Controller {
             $smallAd->setUser($user);
             $smallAd->setStartDate(new dateTime());
             $smallAd->setEndDate(new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 7)));
-            
+
             $photos = $smallAd->getPhotos();
-            if($photos) {
-                $photoName = "i6r8jopp." . $photos->guessExtension();
+            if ($photos) {
+                $photoName = date("YmdHis") . mt_rand(1, 9000) . "." . $photos->guessExtension();
                 $photos->move($this->getParameter('img_directory'), $photoName);
                 $smallAd->setPhotos($photoName);
             }
@@ -63,33 +62,30 @@ class SmallAdController extends Controller {
     /**
      * @Route("/edit")
      */
-    public function editAction()
-    {
+    public function editAction() {
         return $this->render('SmallAdsBundle:SmallAd:edit.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
     /**
      * @Route("/show")
      */
-    public function showAction()
-    {
+    public function showAction() {
         return $this->render('SmallAdsBundle:SmallAd:show.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
     /**
      * @Route("/showAll")
      */
-    public function showAllAction()
-    {
+    public function showAllAction() {
         return $this->render('SmallAdsBundle:SmallAd:show_all.html.twig', array(
-            // ...
+                        // ...
         ));
     }
-    
+
     /**
      * @Route("/{categoryId}/showAllByCategory")
      */
@@ -102,10 +98,9 @@ class SmallAdController extends Controller {
     /**
      * @Route("/{adId}/delete")
      */
-    public function deleteAction()
-    {
+    public function deleteAction() {
         return $this->render('SmallAdsBundle:SmallAd:delete.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
