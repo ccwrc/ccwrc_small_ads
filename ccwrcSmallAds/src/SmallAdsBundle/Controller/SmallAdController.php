@@ -85,8 +85,10 @@ class SmallAdController extends Controller {
      * @Route("/showAll")
      */
     public function showAllAction() {
+        $smallAds = $this->getDoctrine()->getRepository("SmallAdsBundle:SmallAd")->findAll();
+
         return $this->render('SmallAdsBundle:SmallAd:show_all.html.twig', array(
-                        // ...
+                    "smallAds" => $smallAds
         ));
     }
 
