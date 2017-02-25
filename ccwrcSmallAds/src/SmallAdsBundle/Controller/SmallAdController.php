@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use SmallAdsBundle\Entity\SmallAd;
-use SmallAdsBundle\Entity\Category;
 use \DateTime;
 
 /**
@@ -38,11 +37,18 @@ class SmallAdController extends Controller {
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $smallAd = $form->getData();  // var_dump($smallAd); exit;
+            $smallAd = $form->getData();
             $smallAd->setUser($user);
             $smallAd->setStartDate(new dateTime());
-            $smallAd->setEndDate(new dateTime(date("Y-m-d H:i:s", time()+3600*24*7)));
-                  
+            $smallAd->setEndDate(new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 7)));
+            
+            $photos = $smallAd->getPhotos();
+            if($photos) {
+                $photoName = "i6r8jopp." . $photos->guessExtension();
+                $photos->move($this->getParameter('img_directory'), $photoName);
+                $smallAd->setPhotos($photoName);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($smallAd);
             $em->flush();

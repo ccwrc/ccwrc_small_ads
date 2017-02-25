@@ -8,6 +8,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    img_directory: '%kernel.root_dir%/../web/bundles/SmallAdsBundle/img' 
 
 framework:
     #esi:             ~
@@ -73,3 +74,6 @@ fos_user:
     from_email:
         address: ccwrctest@ccwrctest.pl
         sender_name: ccwrc   
+        
+
+           

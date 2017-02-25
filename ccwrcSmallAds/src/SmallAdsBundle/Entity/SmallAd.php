@@ -4,8 +4,6 @@ namespace SmallAdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use Symfony\Component\Validator\Constraint as Assert;
-
 /**
  * SmallAd
  *
@@ -19,9 +17,9 @@ class SmallAd {
      */
     public function __construct()
     {
-        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+    //    $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    //    $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -48,7 +46,8 @@ class SmallAd {
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Photo", mappedBy="smallAd", cascade={"remove"})
+     * @ORM\Column(type="string")
+     * @ORM\OneToMany(targetEntity="Photo", mappedBy="smallAd", cascade={"persist","remove"})
      */
     private $photos;
 
@@ -229,15 +228,15 @@ class SmallAd {
 //        return $this;
 //    }
     
-    /**
-     * Get categories
-     *
-     * @return string 
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
+//    /**
+//     * Get categories
+//     *
+//     * @return string 
+//     */
+//    public function getCategories()
+//    {
+//        return $this->categories;
+//    }
 
     /**
      * Set comments
@@ -285,28 +284,28 @@ class SmallAd {
         $this->photos->removeElement($photos);
     }
 
-    /**
-     * Add categories
-     *
-     * @param \SmallAdsBundle\Entity\Category $categories
-     * @return SmallAd
-     */
-    public function addCategory(\SmallAdsBundle\Entity\Category $categories)
-    {
-        $this->categories[] = $categories;
+//    /**
+//     * Add categories
+//     *
+//     * @param \SmallAdsBundle\Entity\Category $categories
+//     * @return SmallAd
+//     */
+//    public function addCategory(\SmallAdsBundle\Entity\Category $categories)
+//    {
+//        $this->categories[] = $categories;
+//
+//        return $this;
+//    }
 
-        return $this;
-    }
-
-    /**
-     * Remove categories
-     *
-     * @param \SmallAdsBundle\Entity\Category $categories
-     */
-    public function removeCategory(\SmallAdsBundle\Entity\Category $categories)
-    {
-        $this->categories->removeElement($categories);
-    }
+//    /**
+//     * Remove categories
+//     *
+//     * @param \SmallAdsBundle\Entity\Category $categories
+//     */
+//    public function removeCategory(\SmallAdsBundle\Entity\Category $categories)
+//    {
+//        $this->categories->removeElement($categories);
+//    }
 
     /**
      * Add comments
@@ -354,4 +353,37 @@ class SmallAd {
         return $this->user;
     }
 
+
+    /**
+     * Add categories
+     *
+     * @param \SmallAdsBundle\Entity\Category $categories
+     * @return SmallAd
+     */
+    public function addCategory(\SmallAdsBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \SmallAdsBundle\Entity\Category $categories
+     */
+    public function removeCategory(\SmallAdsBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
 }
