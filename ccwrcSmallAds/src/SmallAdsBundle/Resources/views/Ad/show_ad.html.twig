@@ -9,7 +9,10 @@
     Tytuł ogłoszenia: {{ ad.title }} <br/><br/>
     Opis ogłoszenia: {{ ad.description }} <br/><br/>
     Termin zakończenia: {{ ad.endDate.date | date("d/m/Y H:i:s") }} <br/><br/>
-    Zdjęcie: <br/><br/>
-    <img src="{{ asset('/bundles/SmallAdsBundle/uploads_img/' ~ ad.photoPath) }}">
+
+    {% if ad.photoPath is not empty %}
+        Zdjęcie: <br/><br/>
+        <img src="{{ asset('/bundles/SmallAdsBundle/uploads_img/' ~ ad.photoPath) }}">
+    {% endif %}
 
 {% endblock %}

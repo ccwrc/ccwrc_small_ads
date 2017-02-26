@@ -58,12 +58,44 @@ class AdController extends Controller {
     }
 
     /**
-     * @Route("/editAd")
+     * @Route("/{id}/editAd", requirements={"id"="\d+"})
      */
-    public function editAdAction()
-    {
+    public function editAdAction(Request $req, $id) {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
+        $user = $this->container->get("security.context")->getToken()->getUser();
+        $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
+  //TODO dodac zabezpieczenie edycji przez innego usera
+        $form = $this->createFormBuilder($ad)
+                ->setMethod("POST")
+                ->add("title", "text", ["label" => "Edytuj tytuł: "])
+                ->add("description", "textarea", ["label" => "Edytuj opis: "])
+                ->add("category", EntityType::class, [
+                    "class" => "SmallAdsBundle:Category", "choice_label" => "name",
+                    "label" => "Zmień kategorię: "])
+                ->add("photoPath", "file", ["label" => "Wgraj foto (pliki: .jpg, .png)",
+                    "data_class" => null,
+                    "required" => false])
+                ->add("save", "submit", ["label" => "Zapisz"])
+                ->getForm();
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $ad = $form->getData();
+            //TODO zostawić stare zdjęcie przy nie wybraniu nowego
+            $photoPath = $ad->getPhotoPath();
+            if ($photoPath) {
+                $photoName = date("YmdHis") . mt_rand(1, 9999) . "." . $photoPath->guessExtension();
+                $photoPath->move($this->getParameter('uploads_img'), $photoName);
+                $ad->setPhotoPath($photoName);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("smallads_ad_showallads");
+        }
+
         return $this->render('SmallAdsBundle:Ad:edit_ad.html.twig', array(
-            // ...
+                    "form" => $form->createView()
         ));
     }
 
