@@ -3,5 +3,14 @@
 {% block title %}SmallAdsBundle:Ad:showAllAds{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Ad:showAllAds page</h1>
+
+    <h1>Welcome to the Ad:showAllAds page</h1>
+
+    {% for ad in ads %}
+        <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }}</a>
+        <hr/>
+    {% else %}
+        Brak aktualnych ogłoszeń
+    {% endfor %}
+
 {% endblock %}

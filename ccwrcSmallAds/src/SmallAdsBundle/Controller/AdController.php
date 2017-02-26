@@ -81,20 +81,22 @@ class AdController extends Controller {
     /**
      * @Route("/showAllAds")
      */
-    public function showAllAdsAction()
-    {
+    public function showAllAdsAction() {
+        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAll();
+
         return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
-            // ...
+                    "ads" => $ads
         ));
     }
 
     /**
-     * @Route("/showAllAdsByCategory")
+     * @Route("/{id}/showAllAdsByCategory", requirements={"id"="\d+"})
      */
-    public function showAllAdsByCategoryAction()
-    {
-        return $this->render('SmallAdsBundle:Ad:show_all_ads_by_category.html.twig', array(
-            // ...
+    public function showAllAdsByCategoryAction($id) {
+        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findByCategory($id);
+
+        return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
+                    "ads" => $ads
         ));
     }
 

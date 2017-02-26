@@ -8,7 +8,7 @@
 
     Tytuł ogłoszenia: {{ ad.title }} <br/><br/>
     Opis ogłoszenia: {{ ad.description }} <br/><br/>
-    Termin zakończenia: {{ ad.endDate.date | date("m/d/Y H:i:s") }} <br/><br/>
+    Termin zakończenia: {{ ad.endDate.date | date("d/m/Y H:i:s") }} <br/><br/>
     Zdjęcie: <br/><br/>
     <img src="{{ asset('/bundles/SmallAdsBundle/uploads_img/' ~ ad.photoPath) }}">
 
