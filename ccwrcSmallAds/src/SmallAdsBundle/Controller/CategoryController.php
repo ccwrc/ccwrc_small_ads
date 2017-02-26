@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use SmallAdsBundle\Entity\Category;
 
 class CategoryController extends Controller {
-    
+
     /**
      * @Route("/createCategory")
      */

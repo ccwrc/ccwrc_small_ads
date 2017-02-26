@@ -253,4 +253,5 @@ class Ad
     {
         return $this->comments;
     }
+
 }

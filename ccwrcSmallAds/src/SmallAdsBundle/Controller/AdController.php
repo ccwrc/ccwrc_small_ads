@@ -4,16 +4,56 @@ namespace SmallAdsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use \DateTime;
 
-class AdController extends Controller
-{
+use SmallAdsBundle\Entity\Ad;
+
+class AdController extends Controller {
+    
     /**
      * @Route("/createAd")
      */
-    public function createAdAction()
-    {
+    public function createAdAction(Request $req) {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
+        $user = $this->container->get("security.context")->getToken()->getUser();
+        $ad = new Ad();
+
+        $form = $this->createFormBuilder($ad)
+                ->setMethod("POST")
+                ->add("title", "text", ["label" => "Podaj tytuł: "])
+                ->add("description", "textarea", ["label" => "Dodaj opis: "])
+                ->add("category", EntityType::class, [
+                    "class" => "SmallAdsBundle:Category", "choice_label" => "name",
+                    "label" => "Wybierz kategorię: "])
+                ->add("photoPath", "file", ["label" => "Wgraj foto (pliki: .jpg, .png)",
+                    "data_class" => null,
+                    "required" => false])
+                ->add("save", "submit", ["label" => "Zapisz"])
+                ->getForm();
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $ad = $form->getData();
+            $ad->setUser($user);
+            $ad->setEndDate(new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 7)));
+
+            $photoPath = $ad->getPhotoPath();
+            if ($photoPath) {
+                $photoName = date("YmdHis") . mt_rand(1, 9999) . "." . $photoPath->guessExtension();
+                $photoPath->move($this->getParameter('uploads_img'), $photoName);
+                $ad->setPhotoPath($photoName);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($ad);
+            $em->flush();
+            return $this->redirectToRoute("smallads_ad_showallads");
+        }
+
         return $this->render('SmallAdsBundle:Ad:create_ad.html.twig', array(
-            // ...
+                    "form" => $form->createView()
         ));
     }
 
@@ -28,12 +68,13 @@ class AdController extends Controller
     }
 
     /**
-     * @Route("/showAd")
+     * @Route("/{id}/showAd", requirements={"id"="\d+"})
      */
-    public function showAdAction()
-    {
+    public function showAdAction($id) {
+        $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
+
         return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
-            // ...
+                    "ad" => $ad
         ));
     }
 
