@@ -3,5 +3,13 @@
 {% block title %}SmallAdsBundle:Comment:createComment{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Comment:createComment page</h1>
+
+    <h1>Welcome to the Comment:createComment page</h1>
+
+    {{ form_start(commentForm) }}
+    {{ form_widget(commentForm) }}
+    {{ form_end(commentForm) }}
+
 {% endblock %}
+
+

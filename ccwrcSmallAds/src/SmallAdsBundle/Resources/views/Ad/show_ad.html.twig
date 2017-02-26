@@ -8,11 +8,20 @@
 
     Tytuł ogłoszenia: {{ ad.title }} <br/><br/>
     Opis ogłoszenia: {{ ad.description }} <br/><br/>
-    Termin zakończenia: {{ ad.endDate.date | date("d/m/Y H:i:s") }} <br/><br/>
+    Ogłoszenie wygasa: {{ ad.endDate.date | date("d/m/Y H:i:s") }} <br/><br/>
 
     {% if ad.photoPath is not empty %}
         Zdjęcie: <br/><br/>
         <img src="{{ asset('/bundles/SmallAdsBundle/uploads_img/' ~ ad.photoPath) }}">
     {% endif %}
+    
+    <br/>
+    <a href="{{ path("smallads_comment_createcomment", {"id":ad.id}) }}">Skomentuj ogłoszenie</a>
+    
+{#    {% render url('smallads_comment_createcomment', {'id': ad.id}) %}#}
+    
+{#{{ render(controller('SmallAdsBundle:Comment:createComment', {'id': ad.id})) }}#}
+    
+{#    {% render controller('SmallAdsBundle:Comment:create_comment.html.twig', {"id": ad.id }) %}#}
 
 {% endblock %}
