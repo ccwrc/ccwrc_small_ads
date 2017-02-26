@@ -11,7 +11,7 @@ use \DateTime;
 use SmallAdsBundle\Entity\Ad;
 
 class AdController extends Controller {
-    
+
     /**
      * @Route("/createAd")
      */
@@ -64,6 +64,7 @@ class AdController extends Controller {
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
         $user = $this->container->get("security.context")->getToken()->getUser();
         $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
+        $oldPhotoName = $ad->getPhotoPath();
 
         if ($user !== $ad->getUser()) {
             throw $this->createNotFoundException("Brak pasującego ID");
@@ -76,7 +77,7 @@ class AdController extends Controller {
                 ->add("category", EntityType::class, [
                     "class" => "SmallAdsBundle:Category", "choice_label" => "name",
                     "label" => "Zmień kategorię: "])
-                ->add("photoPath", "file", ["label" => "Wgraj foto (pliki: .jpg, .png)",
+                ->add("photoPath", "file", ["label" => "Wgraj inne zdjęcie: ",
                     "data_class" => null,
                     "required" => false])
                 ->add("save", "submit", ["label" => "Zapisz"])
@@ -85,9 +86,10 @@ class AdController extends Controller {
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
             $ad = $form->getData();
-            //TODO zostawić stare zdjęcie przy nie wybraniu nowego
             $photoPath = $ad->getPhotoPath();
-            if ($photoPath) {
+            if ($photoPath === null) {
+                $ad->setPhotoPath($oldPhotoName);
+            } else {
                 $photoName = date("YmdHis") . mt_rand(1, 9999) . "." . $photoPath->guessExtension();
                 $photoPath->move($this->getParameter('uploads_img'), $photoName);
                 $ad->setPhotoPath($photoName);
@@ -109,6 +111,10 @@ class AdController extends Controller {
     public function showAdAction($id) {
         $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
 
+        if ($ad == null) {
+            throw $this->createNotFoundException("Brak ogłoszenia o podanym ID");
+        }
+
         return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
                     "ad" => $ad
         ));
@@ -119,7 +125,7 @@ class AdController extends Controller {
      */
     public function showAllAdsAction() {
         $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAll();
-
+    //TODO przebudowac na zapytanie z porowaniem dat
         return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
                     "ads" => $ads
         ));
@@ -130,12 +136,12 @@ class AdController extends Controller {
      */
     public function showAllAdsByCategoryAction($id) {
         $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findByCategory($id);
-
+    //TODO przebudowac na zapytanie z porowaniem dat
         return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
                     "ads" => $ads
         ));
     }
-    
+
     /**
      * @Route("/showAllAdsByUser")
      */
