@@ -131,6 +131,19 @@ class AdController extends Controller {
                     "ads" => $ads
         ));
     }
+    
+    /**
+     * @Route("/showAllAdsByUser")
+     */
+    public function showAllAdsByUserAction() {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
+        $user = $this->container->get("security.context")->getToken()->getUser();
+        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findByUser($user);
+
+        return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
+                    "ads" => $ads
+        ));
+    }
 
     /**
      * @Route("/{id}/deleteAd", requirements={"id"="\d+"})
