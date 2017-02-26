@@ -133,13 +133,20 @@ class AdController extends Controller {
     }
 
     /**
-     * @Route("/deleteAd")
+     * @Route("/{id}/deleteAd", requirements={"id"="\d+"})
      */
-    public function deleteAdAction()
-    {
-        return $this->render('SmallAdsBundle:Ad:delete_ad.html.twig', array(
-            // ...
-        ));
+    public function deleteAdAction($id) {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
+        $user = $this->container->get("security.context")->getToken()->getUser();
+        $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
+
+        if ($user === $ad->getUser()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($ad);
+            $em->flush();
+        }
+        //TODO przek. czasowe, zmienić na dedykowane dla usera
+        return $this->redirectToRoute("smallads_ad_showallads");
     }
 
 }
