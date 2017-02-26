@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 25, 2017 at 10:31 PM
+-- Generation Time: Feb 26, 2017 at 12:37 PM
 -- Server version: 5.7.17-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.2
 
@@ -47,6 +47,13 @@ CREATE TABLE `category` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'Jednorożce');
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +88,14 @@ CREATE TABLE `fos_user` (
   `password_requested_at` datetime DEFAULT NULL,
   `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `fos_user`
+--
+
+INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
+(1, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@ccwrcuser.pl', 'ccwrcuser@ccwrcuser.pl', 1, NULL, '$2y$13$QppOYAnN2Aa9CCBGp/G0OuchtL0QrwFu/JSXu63c5SNsHVgDOZZyq', '2017-02-25 22:34:11', NULL, NULL, 'a:0:{}'),
+(2, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@ccwrcadmin.pl', 'ccwrcadmin@ccwrcadmin.pl', 1, NULL, '$2y$13$jICqqGaP8OWVjJtHXUClBOK54HZl2JLu/wFgfzL/WQnwQhp3DkPVS', '2017-02-25 22:35:44', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}');
 
 --
 -- Indexes for dumped tables
@@ -131,7 +146,7 @@ ALTER TABLE `ad`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `comment`
 --
@@ -141,7 +156,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `fos_user`
 --
 ALTER TABLE `fos_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
