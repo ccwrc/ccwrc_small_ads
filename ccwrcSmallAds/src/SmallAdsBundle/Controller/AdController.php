@@ -64,7 +64,11 @@ class AdController extends Controller {
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
         $user = $this->container->get("security.context")->getToken()->getUser();
         $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
-  //TODO dodac zabezpieczenie edycji przez innego usera
+
+        if ($user !== $ad->getUser()) {
+            throw $this->createNotFoundException("Brak pasującego ID");
+        }
+
         $form = $this->createFormBuilder($ad)
                 ->setMethod("POST")
                 ->add("title", "text", ["label" => "Edytuj tytuł: "])
@@ -91,7 +95,7 @@ class AdController extends Controller {
 
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute("smallads_ad_showallads");
+            return $this->redirectToRoute("smallads_ad_showalladsbyuser");
         }
 
         return $this->render('SmallAdsBundle:Ad:edit_ad.html.twig', array(
@@ -140,7 +144,7 @@ class AdController extends Controller {
         $user = $this->container->get("security.context")->getToken()->getUser();
         $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findByUser($user);
 
-        return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
+        return $this->render('SmallAdsBundle:Ad:show_all_ads_by_user.html.twig', array(
                     "ads" => $ads
         ));
     }
@@ -158,8 +162,8 @@ class AdController extends Controller {
             $em->remove($ad);
             $em->flush();
         }
-        //TODO przek. czasowe, zmienić na dedykowane dla usera
-        return $this->redirectToRoute("smallads_ad_showallads");
+
+        return $this->redirectToRoute("smallads_ad_showalladsbyuser");
     }
 
 }
