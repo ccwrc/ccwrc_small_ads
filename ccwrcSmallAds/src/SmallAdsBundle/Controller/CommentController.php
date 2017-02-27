@@ -11,7 +11,7 @@ use SmallAdsBundle\Entity\Comment;
 use SmallAdsBundle\Entity\User;
 
 class CommentController extends Controller {
-    
+
     /**
      * @Route("/{id}/createComment", requirements={"id"="\d+"})
      */
@@ -42,7 +42,6 @@ class CommentController extends Controller {
         }
 
         return $this->render('SmallAdsBundle:Comment:create_comment.html.twig', array(
-                 //   "id" => $id,
                     "commentForm" => $commentForm->createView()
         ));
     }
@@ -54,7 +53,7 @@ class CommentController extends Controller {
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
         $user = $this->container->get("security.context")->getToken()->getUser();
         $comment = $this->getDoctrine()->getRepository("SmallAdsBundle:Comment")->find($id);
-        
+
         if ($user !== $comment->getUser()) {
             throw $this->createNotFoundException("Brak zgodności ID");
         }
@@ -74,18 +73,7 @@ class CommentController extends Controller {
         }
 
         return $this->render('SmallAdsBundle:Comment:edit_comment.html.twig', array(
-                  //  "id" => $id,
                     "commentForm" => $commentForm->createView()
-        ));
-    }
-
-    /**
-     * @Route("/showAllCommentsByAd")
-     */
-    public function showAllCommentsByAdAction()
-    {
-        return $this->render('SmallAdsBundle:Comment:show_all_comments_by_ad.html.twig', array(
-            // ...
         ));
     }
 
