@@ -13,7 +13,7 @@ use SmallAdsBundle\Entity\User;
 class CommentController extends Controller {
     
     /**
-     * @Route("/{id}/createComment")
+     * @Route("/{id}/createComment", requirements={"id"="\d+"})
      */
     public function createCommentAction(Request $req, $id) {
         $user = $this->container->get("security.context")->getToken()->getUser();
@@ -68,7 +68,7 @@ class CommentController extends Controller {
     }
 
     /**
-     * @Route("/deleteComment")
+     * @Route("/{id}/deleteComment", requirements={"id"="\d+"})
      */
     public function deleteCommentAction()
     {

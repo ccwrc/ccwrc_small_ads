@@ -14,14 +14,14 @@
         Zdjęcie: <br/><br/>
         <img src="{{ asset('/bundles/SmallAdsBundle/uploads_img/' ~ ad.photoPath) }}">
     {% endif %}
-    
+
     <br/>
     <a href="{{ path("smallads_comment_createcomment", {"id":ad.id}) }}">Skomentuj ogłoszenie</a>
-    
-{#    {% render url('smallads_comment_createcomment', {'id': ad.id}) %}#}
-    
-{#{{ render(controller('SmallAdsBundle:Comment:createComment', {'id': ad.id})) }}#}
-    
-{#    {% render controller('SmallAdsBundle:Comment:create_comment.html.twig', {"id": ad.id }) %}#}
+
+    {#    {% render url('smallads_comment_createcomment', {'id': ad.id}) %}#}
+
+    {#{{ render(controller('SmallAdsBundle:Comment:createComment', {'id': ad.id})) }}#}
+
+    {# {% render controller('SmallAdsBundle:Comment:create_comment.html.twig', {"id": ad.id }) %}#}
 
 {% endblock %}
