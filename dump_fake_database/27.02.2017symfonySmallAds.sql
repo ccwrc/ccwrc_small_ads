@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2017 at 05:57 PM
+-- Generation Time: Feb 27, 2017 at 10:43 PM
 -- Server version: 5.7.17-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.2
 
@@ -89,15 +89,18 @@ CREATE TABLE `comment` (
 
 INSERT INTO `comment` (`id`, `user_id`, `ad_id`, `date`, `text`) VALUES
 (1, 1, 1, '2017-02-26 21:35:54', 'ytdytdt'),
-(2, 1, 1, '2017-02-26 21:35:59', 'ytdytdt'),
-(3, 1, 1, '2017-02-26 21:36:31', 'ytdytdtgsdgdsf'),
+(3, 1, 1, '2017-02-26 21:36:31', 'i po edycji komentarz'),
 (4, 1, 2, '2017-02-26 21:54:25', 'q324rwefdqd'),
 (5, 1, 2, '2017-02-26 21:55:25', 'q324rwefdqdfffffffffffffffffffffffff'),
 (6, 1, 2, '2017-02-26 22:14:32', 'nowyyy'),
 (7, NULL, 2, '2017-02-26 22:17:56', 'bla222'),
 (8, NULL, 1, '2017-02-26 22:18:53', 'jytdydydydydy0000'),
-(9, 2, 1, '2017-02-26 22:20:03', 'admin kom'),
-(10, 2, 6, '2017-02-26 22:38:38', 'fgfgfgfgfgfgf');
+(9, 2, 1, '2017-02-26 22:20:03', 'admin kom edot'),
+(10, 2, 6, '2017-02-26 22:38:38', 'fgfgfgfgfgfgf'),
+(11, NULL, 1, '2017-02-27 18:00:07', 'nowy koment 27'),
+(14, 1, 1, '2017-02-27 21:57:26', 'bla zalogowany po edycji'),
+(15, NULL, 3, '2017-02-27 22:29:10', 'anonimmmmmm'),
+(16, NULL, 3, '2017-02-27 22:29:26', 'ytyryrytryt');
 
 -- --------------------------------------------------------
 
@@ -125,8 +128,8 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@ccwrcuser.pl', 'ccwrcuser@ccwrcuser.pl', 1, NULL, '$2y$13$QppOYAnN2Aa9CCBGp/G0OuchtL0QrwFu/JSXu63c5SNsHVgDOZZyq', '2017-02-26 20:51:33', NULL, NULL, 'a:0:{}'),
-(2, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@ccwrcadmin.pl', 'ccwrcadmin@ccwrcadmin.pl', 1, NULL, '$2y$13$jICqqGaP8OWVjJtHXUClBOK54HZl2JLu/wFgfzL/WQnwQhp3DkPVS', '2017-02-26 22:19:52', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}');
+(1, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@ccwrcuser.pl', 'ccwrcuser@ccwrcuser.pl', 1, NULL, '$2y$13$QppOYAnN2Aa9CCBGp/G0OuchtL0QrwFu/JSXu63c5SNsHVgDOZZyq', '2017-02-27 20:59:58', NULL, NULL, 'a:0:{}'),
+(2, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@ccwrcadmin.pl', 'ccwrcadmin@ccwrcadmin.pl', 1, NULL, '$2y$13$jICqqGaP8OWVjJtHXUClBOK54HZl2JLu/wFgfzL/WQnwQhp3DkPVS', '2017-02-27 22:22:38', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}');
 
 --
 -- Indexes for dumped tables
@@ -182,7 +185,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `fos_user`
 --
