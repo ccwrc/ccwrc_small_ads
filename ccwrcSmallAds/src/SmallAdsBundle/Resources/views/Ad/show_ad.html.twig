@@ -17,11 +17,23 @@
 
     <br/>
     <a href="{{ path("smallads_comment_createcomment", {"id":ad.id}) }}">Skomentuj ogłoszenie</a>
-
-    {#    {% render url('smallads_comment_createcomment', {'id': ad.id}) %}#}
-
+    <br/><br/>
+    {# na poxniej - nie dziala zgodnie z zalozeniami#}
+    {#   {% render url('smallads_comment_createcomment', {'id': ad.id}) %}#}
     {#{{ render(controller('SmallAdsBundle:Comment:createComment', {'id': ad.id})) }}#}
-
     {# {% render controller('SmallAdsBundle:Comment:create_comment.html.twig', {"id": ad.id }) %}#}
+
+    {% for comment in ad.comments %}
+        {{ comment.date | date("d/m/Y H:i:s") }} Dodany przez:
+        {% if comment.user is not null %}
+            {{ comment.user }}
+        {% else %}
+            Anonim
+        {% endif %} <br/>
+
+        {{ comment.text }} <br/><br/>
+    {% else %}
+        Brak komentarzy
+    {% endfor %}
 
 {% endblock %}
