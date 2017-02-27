@@ -42,18 +42,40 @@ class CommentController extends Controller {
         }
 
         return $this->render('SmallAdsBundle:Comment:create_comment.html.twig', array(
-                    "id" => $id,
+                 //   "id" => $id,
                     "commentForm" => $commentForm->createView()
         ));
     }
 
     /**
-     * @Route("/editComment")
+     * @Route("/{id}/{adId}/editComment", requirements={"id"="\d+", "adId"="\d+"})
      */
-    public function editCommentAction()
-    {
+    public function editCommentAction(Request $req, $id, $adId) {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
+        $user = $this->container->get("security.context")->getToken()->getUser();
+        $comment = $this->getDoctrine()->getRepository("SmallAdsBundle:Comment")->find($id);
+        
+        if ($user !== $comment->getUser()) {
+            throw $this->createNotFoundException("Brak zgodności ID");
+        }
+
+        $commentForm = $this->createFormBuilder($comment)
+                ->setMethod("POST")
+                ->add("text", "textarea", ["label" => "Edytuj komentarz: "])
+                ->add("save", "submit", ["label" => "Zapisz"])
+                ->getForm();
+
+        $commentForm->handleRequest($req);
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $comment = $commentForm->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("smallads_ad_showad", ["id" => $adId]);
+        }
+
         return $this->render('SmallAdsBundle:Comment:edit_comment.html.twig', array(
-            // ...
+                  //  "id" => $id,
+                    "commentForm" => $commentForm->createView()
         ));
     }
 

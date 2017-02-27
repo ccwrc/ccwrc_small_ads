@@ -31,11 +31,12 @@
         {% else %}
             Anonim
         {% endif %} <br/>
-        {{ comment.text }} 
-
+        {{ comment.text }}         
+        
         {% if comment.user.id is defined %}
             {% if (app.user.id) == (comment.user.id) %} {# można dodac opcje usuwania komentarzy przez właściciela ogłoszenia #}
                 <a href="{{ path("smallads_comment_deletecomment", {"id":comment.id, "adId":ad.id}) }}">Usuń</a>
+                <a href="{{ path("smallads_comment_editcomment", {"id":comment.id, "adId":ad.id}) }}">Edytuj</a>
             {% endif %}
         {% endif %}
 
