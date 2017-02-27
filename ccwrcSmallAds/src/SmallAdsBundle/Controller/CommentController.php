@@ -68,13 +68,20 @@ class CommentController extends Controller {
     }
 
     /**
-     * @Route("/{id}/deleteComment", requirements={"id"="\d+"})
+     * @Route("/{id}/{adId}/deleteComment", requirements={"id"="\d+", "adId"="\d+"})
      */
-    public function deleteCommentAction()
-    {
-        return $this->render('SmallAdsBundle:Comment:delete_comment.html.twig', array(
-            // ...
-        ));
+    public function deleteCommentAction($id, $adId) {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
+        $user = $this->container->get("security.context")->getToken()->getUser();
+        $comment = $this->getDoctrine()->getRepository("SmallAdsBundle:Comment")->find($id);
+
+        if ($user === $comment->getUser()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($comment);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute("smallads_ad_showad", ["id" => $adId]);
     }
 
 }
