@@ -15,9 +15,10 @@
         <img src="{{ asset('/bundles/SmallAdsBundle/uploads_img/' ~ ad.photoPath) }}">
     {% endif %}
 
-    <br/>
+    <br/><br/>
     <a href="{{ path("smallads_comment_createcomment", {"id":ad.id}) }}">Skomentuj ogłoszenie</a>
     <br/><br/>
+
     {# na poxniej - nie dziala zgodnie z zalozeniami#}
     {#   {% render url('smallads_comment_createcomment', {'id': ad.id}) %}#}
     {#{{ render(controller('SmallAdsBundle:Comment:createComment', {'id': ad.id})) }}#}
@@ -26,12 +27,19 @@
     {% for comment in ad.comments %}
         {{ comment.date | date("d/m/Y H:i:s") }} Dodany przez:
         {% if comment.user is not null %}
-            {{ comment.user }}
+            {{ comment.user }} {{ comment.user.id }}
         {% else %}
             Anonim
         {% endif %} <br/>
+        {{ comment.text }} 
 
-        {{ comment.text }} <br/><br/>
+        {% if comment.user.id is defined %}
+            {% if (app.user.id) == (comment.user.id) %} {# można dodac opcje usuwania komentarzy przez właściciela ogłoszenia #}
+                <a href="{{ path("smallads_comment_deletecomment", {"id":comment.id, "adId":ad.id}) }}">Usuń</a>
+            {% endif %}
+        {% endif %}
+
+        <br/><br/>
     {% else %}
         Brak komentarzy
     {% endfor %}
