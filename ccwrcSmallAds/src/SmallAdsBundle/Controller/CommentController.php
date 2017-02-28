@@ -38,6 +38,8 @@ class CommentController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
+            // mailer ///////////////////////////////////
+            $this->mailAction("ccwrcltd@uiuiuiu.com", "tytuł");
             return $this->redirectToRoute("smallads_ad_showad", ["id" => $id]);
         }
 
@@ -92,6 +94,17 @@ class CommentController extends Controller {
         }
 
         return $this->redirectToRoute("smallads_ad_showad", ["id" => $adId]);
+    }
+    
+    private function mailAction($userEmail, $adTitle) {
+        $message = \Swift_Message::newInstance()
+                ->setSubject($adTitle)
+                ->setFrom('smalladsbundle@gmail.com')
+                ->setTo($userEmail)
+                ->setBody(
+                $this->renderView('SmallAdsBundle:Comment:info_mail.html.twig'), 'text/html');
+
+        $this->get('mailer')->send($message);
     }
 
 }
