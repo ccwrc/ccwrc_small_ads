@@ -38,8 +38,11 @@ class CommentController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
-            // mailer ///////////////////////////////////
-            $this->mailAction("ccwrcltd@uiuiuiu.com", "tytuł");
+            // powiadomienie mailowe o nowym komentarzu
+            $adTitle = $ad->getTitle();
+            $userEmail = $ad->getUser()->getEmail();    
+            $this->mailAction($userEmail, $adTitle);
+            
             return $this->redirectToRoute("smallads_ad_showad", ["id" => $id]);
         }
 
@@ -98,11 +101,13 @@ class CommentController extends Controller {
     
     private function mailAction($userEmail, $adTitle) {
         $message = \Swift_Message::newInstance()
-                ->setSubject($adTitle)
+                ->setSubject($adTitle . " - nowy komentarz do ogłoszenia")
                 ->setFrom('smalladsbundle@gmail.com')
                 ->setTo($userEmail)
                 ->setBody(
-                $this->renderView('SmallAdsBundle:Comment:info_mail.html.twig'), 'text/html');
+                $this->renderView('SmallAdsBundle:Comment:info_mail.html.twig', [
+                    "adTitle" => $adTitle
+                ]), 'text/html');
 
         $this->get('mailer')->send($message);
     }
