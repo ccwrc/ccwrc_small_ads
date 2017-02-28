@@ -49,7 +49,7 @@ class AdController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($ad);
             $em->flush();
-            return $this->redirectToRoute("smallads_ad_showallads");
+            return $this->redirectToRoute("smallads_ad_showalladsbyuser");
         }
 
         return $this->render('SmallAdsBundle:Ad:create_ad.html.twig', array(
@@ -174,6 +174,14 @@ class AdController extends Controller {
         }
 
         return $this->redirectToRoute("smallads_ad_showalladsbyuser");
+    }
+    
+    /**
+     * @Route("/regulations")
+     */
+    public function regulationsAction() {
+
+        return $this->render('SmallAdsBundle:Ad:regulations.html.twig');
     }
 
 }

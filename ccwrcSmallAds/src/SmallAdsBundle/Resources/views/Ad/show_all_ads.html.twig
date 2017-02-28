@@ -8,8 +8,9 @@
 
     <h1>Welcome to the Ad:showAllAds page</h1>
 
-    Wybierz kategorię ogłoszeń: 
+    Wybierz kategorię ogłoszeń 
     <select name="Wybierz kategorię" onchange="location = this.value;">
+        <option>z listy</option>
         {% for category in categories %}
             <option value="{{ path("smallads_ad_showalladsbycategory", {"id":category.id}) }}">
                 {{ category.name }} 
@@ -20,7 +21,7 @@
     </select> <br/><br/>
 
     {% for ad in ads %}
-        <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }}</a>
+        <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">({{ ad.category }}) {{ ad.title }}</a>
         <hr/>
     {% else %}
         Brak aktualnych ogłoszeń

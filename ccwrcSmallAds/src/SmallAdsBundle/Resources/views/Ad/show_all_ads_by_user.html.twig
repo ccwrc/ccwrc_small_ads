@@ -9,7 +9,7 @@
     <h1>Welcome to the Ad:showAllAds by user page</h1>
 
     {% for ad in ads %}
-        <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }}</a> <br/>
+        <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }} ({{ ad.category }})</a> <br/>
         <a href="{{ path("smallads_ad_editad", {"id":ad.id}) }}">Edytuj ogłoszenie</a>
         <a href="{{ path("smallads_ad_deletead", {"id":ad.id}) }}">Usuń ogłoszenie</a>
 
