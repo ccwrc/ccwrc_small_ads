@@ -125,9 +125,11 @@ class AdController extends Controller {
      */
     public function showAllAdsAction() {
         $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAll();
-    //TODO przebudowac na zapytanie z porowaniem dat
+        $categories = $this->getDoctrine()->getRepository("SmallAdsBundle:Category")->findAll();
+        //TODO przebudowac na zapytanie z porowaniem dat
         return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
-                    "ads" => $ads
+                    "ads" => $ads,
+                    "categories" => $categories
         ));
     }
 
@@ -136,9 +138,11 @@ class AdController extends Controller {
      */
     public function showAllAdsByCategoryAction($id) {
         $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findByCategory($id);
-    //TODO przebudowac na zapytanie z porowaniem dat
+        $categories = $this->getDoctrine()->getRepository("SmallAdsBundle:Category")->findAll();
+        //TODO przebudowac na zapytanie z porowaniem dat
         return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
-                    "ads" => $ads
+                    "ads" => $ads,
+                    "categories" => $categories
         ));
     }
 

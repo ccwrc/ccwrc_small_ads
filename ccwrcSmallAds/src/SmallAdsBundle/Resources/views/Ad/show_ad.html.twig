@@ -4,14 +4,17 @@
 
 {% block body %}
 
+    {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
+    
     <h1>Welcome to the Ad:showAd page</h1>
 
-    Tytuł ogłoszenia: {{ ad.title }} <br/><br/>
-    Opis ogłoszenia: {{ ad.description }} <br/><br/>
-    Ogłoszenie wygasa: {{ ad.endDate.date | date("d/m/Y H:i:s") }} <br/><br/>
+    <strong><i> {{ ad.title }} </i></strong><br/><br/>
+    <i> Ogłoszenie dodane przez: </i>{{ ad.user }} <br/><br/>
+    <i>Opis ogłoszenia: </i>{{ ad.description }} <br/><br/>
+    <i>Data wygaśnięcia: </i>{{ ad.endDate.date | date("d/m/Y H:i:s") }} <br/><br/>
 
     {% if ad.photoPath is not empty %}
-        Zdjęcie: <br/><br/>
+        <strong><i> Foto </i></strong> <br/><br/>
         <img src="{{ asset('/bundles/SmallAdsBundle/uploads_img/' ~ ad.photoPath) }}">
     {% endif %}
 
@@ -19,22 +22,25 @@
     <a href="{{ path("smallads_comment_createcomment", {"id":ad.id}) }}">Skomentuj ogłoszenie</a>
     <br/><br/>
 
-    {# na poxniej - nie dziala zgodnie z zalozeniami#}
-    {#   {% render url('smallads_comment_createcomment', {'id': ad.id}) %}#}
-    {#{{ render(controller('SmallAdsBundle:Comment:createComment', {'id': ad.id})) }}#}
+    {# na poxniej - dziala nie do konca zgodnie z zalozeniami#}
+    {# {% render url('smallads_comment_createcomment', {'id': ad.id}) %}#}
+    {# {{ render(controller('SmallAdsBundle:Comment:createComment', {'id': ad.id})) }}#}
     {# {% render controller('SmallAdsBundle:Comment:create_comment.html.twig', {"id": ad.id }) %}#}
 
     {% for comment in ad.comments %}
+        <i>
         {{ comment.date | date("d/m/Y H:i:s") }} Dodany przez:
         {% if comment.user is not null %}
             {{ comment.user }} 
         {% else %}
             Anonim
         {% endif %} <br/>
+        </i>
         {{ comment.text }}         
 
-        {% if app.user is not null and comment.user is not null %} {# błąd null przy anonimie - do poprawy! #}
-            {% if (app.user.id) == (comment.user.id) %} {# można dodac opcje usuwania komentarzy przez właściciela ogłoszenia #}
+        {% if app.user is not null and comment.user is not null %}
+            {% if (app.user.id) == (comment.user.id) %} 
+                {# można ew. dodac opcje usuwania komentarzy przez właściciela ogłoszenia #}
                 <a href="{{ path("smallads_comment_deletecomment", {"id":comment.id, "adId":ad.id}) }}">Usuń</a>
                 <a href="{{ path("smallads_comment_editcomment", {"id":comment.id, "adId":ad.id}) }}">Edytuj</a>
             {% endif %}

@@ -1,0 +1,26 @@
+
+<a href='{{ path("smallads_main_index") }}' ><button>Strona główna</button> </a>
+
+{% if is_granted('ROLE_USER') %}
+    <a href='{{ path("fos_user_security_logout") }}' ><button>Wyloguj</button> </a>
+{% else %}
+    <a href='{{ path("fos_user_security_login") }}' ><button>Zaloguj</button> </a>
+{% endif %}
+
+
+{% if is_granted('ROLE_ADMIN') %}
+    <a href='{{ path("smallads_category_showallcategories") }}' ><button>Admin panel</button> </a>
+{% elseif is_granted('ROLE_USER') %}
+    <a href='{{ path("smallads_ad_showalladsbyuser") }}' ><button>Moje ogłoszenia</button> </a>    
+{% else %}
+    <a href='{{ path("fos_user_registration_register") }}' ><button>Zarejestruj</button> </a>
+{% endif %}
+
+{% if is_granted('ROLE_USER') %}
+    <a href='{{ path("smallads_ad_createad") }}' ><button>Dodaj ogłoszenie</button> </a>
+{% else %}
+    <a href='{{ path("fos_user_resetting_request") }}' ><button>Przypomnij hasło</button> </a>
+{% endif %}
+
+
+<a href='{{ path("smallads_ad_showallads") }}' ><button>Wszystkie ogłoszenia</button> </a>

@@ -4,7 +4,20 @@
 
 {% block body %}
 
+    {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
+
     <h1>Welcome to the Ad:showAllAds page</h1>
+
+    Wybierz kategorię ogłoszeń: 
+    <select name="Wybierz kategorię" onchange="location = this.value;">
+        {% for category in categories %}
+            <option value="{{ path("smallads_ad_showalladsbycategory", {"id":category.id}) }}">
+                {{ category.name }} 
+            </option>
+        {% else %}
+            Brak zapisanych kategorii
+        {% endfor %}
+    </select> <br/><br/>
 
     {% for ad in ads %}
         <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }}</a>
