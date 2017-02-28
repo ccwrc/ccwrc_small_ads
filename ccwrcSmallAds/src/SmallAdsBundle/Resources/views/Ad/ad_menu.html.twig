@@ -22,4 +22,10 @@
     <a href='{{ path("fos_user_resetting_request") }}' ><button>Przypomnij hasło</button> </a>
 {% endif %}
 
+{% if is_granted('ROLE_ADMIN') %}
+    <a href='{{ path("smallads_ad_showalladsbyuser") }}' ><button>Moje ogłoszenia</button> </a>   
+{% else %}
+    <a href='{{ path("smallads_ad_regulations") }}' ><button>Regualmin, FAQ</button> </a>
+{% endif %}
+
 <a href='{{ path("smallads_ad_showallads") }}' ><button>Wszystkie ogłoszenia</button> </a>
