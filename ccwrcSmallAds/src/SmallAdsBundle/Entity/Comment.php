@@ -4,6 +4,8 @@ namespace SmallAdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Comment
  *
@@ -29,6 +31,12 @@ class Comment
     private $date;
 
     /**
+     * @Assert\Length(
+     * min = 3,
+     * max = 500,
+     * minMessage = "Minimalna ilość znaków to {{ limit }}",
+     * maxMessage = "Maksymalna ilość znaków to {{ limit }}"
+     * )
      * @var string
      *
      * @ORM\Column(name="text", type="string", length=500)

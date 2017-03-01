@@ -38,7 +38,8 @@ class AdController extends Controller {
                         "5 dni" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 5)),
                         "6 dni" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 6)),
                         "tydzień" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 7))
-                    ], "choices_as_values" => true, "label" => "Czas trwania: "])
+                    ],
+                    "choices_as_values" => true, "label" => "Czas trwania: "])
                 ->add("save", "submit", ["label" => "Zapisz"])
                 ->getForm();
 
@@ -48,7 +49,7 @@ class AdController extends Controller {
             $ad->setUser($user);
             $photoPath = $ad->getPhotoPath();
             if ($photoPath) {
-                $photoName = date("YmdHis") . mt_rand(1, 9999) . "." . $photoPath->guessExtension();
+                $photoName = $user->getId() . date("YmdHis") . mt_rand(1, 9999) . "." . $photoPath->guessExtension();
                 $photoPath->move($this->getParameter('uploads_img'), $photoName);
                 $ad->setPhotoPath($photoName);
             }
@@ -145,7 +146,7 @@ class AdController extends Controller {
             ));
         } else if ($ad == null) {
             throw $this->createNotFoundException("Brak ogłoszenia o podanym ID");
-        }
+        } // nie ma else - wyczerpane wszystkie dopuszczalne możliwości
     }
 
     /**

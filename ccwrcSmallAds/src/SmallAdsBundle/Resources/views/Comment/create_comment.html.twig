@@ -3,6 +3,8 @@
 {% block title %}small ads - dodawanie komentarza{% endblock %}
 
 {% block body %}
+    
+    {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
 
     <h2>Dodaj komentarz</h2>
     <hr/>
@@ -10,6 +12,8 @@
     {{ form_start(commentForm) }}
     {{ form_widget(commentForm) }}
     {{ form_end(commentForm) }}
+    
+    <hr/>
 
 {% endblock %}
 
