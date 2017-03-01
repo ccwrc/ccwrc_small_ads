@@ -9,3 +9,5 @@ Mini serwis lokalnych ogłoszeń drobnych. Projekt pisany przy użyciu Symfony 2
         - dodawanie(wszyscy)/usuwanie(zalogowani)/edycja(zalogowani) komentarzy,
         - dynamiczne menu w zależności od typu zalogowanego użytkownika,
         - powiadamianie drogą mailową o nowych komentarzach,
+        - przeglądanie historycznych ogłoszeń tylko przez administratora lub ogłoszeniodawcę
+

@@ -1,27 +1,29 @@
 {% extends "SmallAdsBundle:Main:base.html.twig" %}
 
-{% block title %}SmallAdsBundle:Ad:showAllAds{% endblock %}
+{% block title %}small ads - ogłoszenia{% endblock %}
 
 {% block body %}
 
     {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
 
-    <h1>Welcome to the Ad:showAllAds page</h1>
+    <h2>Ogłoszenia drobne</h2>
 
     Wybierz kategorię ogłoszeń 
     <select name="Wybierz kategorię" onchange="location = this.value;">
         <option>z listy</option>
         {% for category in categories %}
             <option value="{{ path("smallads_ad_showalladsbycategory", {"id":category.id}) }}">
-                {{ category.name }} ({{ category.ads | length }})
-            </option>
+                {{ category.name }} {#({{ category.ads | length }})#}
+            </option> {#TODO licznik liczy rowniez archiwalne - do przemyslenia#}
         {% else %}
             Brak zapisanych kategorii
         {% endfor %}
     </select> <br/><br/>
+    <hr/>
 
     {% for ad in ads %}
-        <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">({{ ad.category }}) {{ ad.title }}</a>
+        ({{ ad.category }}) 
+        <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }}</a>
         <hr/>
     {% else %}
         Brak aktualnych ogłoszeń
