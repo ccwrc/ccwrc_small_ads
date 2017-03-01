@@ -1,21 +1,27 @@
 {% extends "SmallAdsBundle:Main:base.html.twig" %}
 
-{% block title %}SmallAdsBundle:Ad:showAllAds by user{% endblock %}
+{% block title %}small ads - ogłoszenia użytkownika{% endblock %}
 
 {% block body %}
 
     {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
 
-    <h1>Welcome to the Ad:showAllAds by user page</h1>
+    <h2>Wszystkie twoje ogłoszenia</h2>
+    <hr/>
 
     {% for ad in ads %}
+
+        {% if date(ad.endDate) < date() %}
+            <strong>Ogłoszenie archiwalne: </strong>
+        {% endif %}
+
         <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }}</a> <br/>
         Kategoria: {{ ad.category }}, Liczba komentarzy: {{ ad.comments | length }}</a> <br/>
-        <a href="{{ path("smallads_ad_editad", {"id":ad.id}) }}">Edytuj ogłoszenie</a>
-        <a href="{{ path("smallads_ad_deletead", {"id":ad.id}) }}">Usuń ogłoszenie</a>
-        <hr/>
-    {% else %}
-        Brak aktualnych ogłoszeń
-    {% endfor %}
+    <a href="{{ path("smallads_ad_editad", {"id":ad.id}) }}">Edytuj ogłoszenie</a>
+    <a href="{{ path("smallads_ad_deletead", {"id":ad.id}) }}">Usuń ogłoszenie</a>
+    <hr/>
+{% else %}
+    Brak aktualnych ogłoszeń
+{% endfor %}
 
 {% endblock %}

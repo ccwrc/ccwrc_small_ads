@@ -41,7 +41,7 @@ class CommentController extends Controller {
             // powiadomienie mailowe o nowym komentarzu
             $adTitle = $ad->getTitle();
             $userEmail = $ad->getUser()->getEmail();    
-            $this->mailAction($userEmail, $adTitle);
+            $this->sendInfoMail($userEmail, $adTitle);
             
             return $this->redirectToRoute("smallads_ad_showad", ["id" => $id]);
         }
@@ -99,7 +99,7 @@ class CommentController extends Controller {
         return $this->redirectToRoute("smallads_ad_showad", ["id" => $adId]);
     }
     
-    private function mailAction($userEmail, $adTitle) {
+    private function sendInfoMail($userEmail, $adTitle) {
         $message = \Swift_Message::newInstance()
                 ->setSubject($adTitle . " - nowy komentarz do ogłoszenia")
                 ->setFrom('smalladsbundle@gmail.com')

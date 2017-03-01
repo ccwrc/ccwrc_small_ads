@@ -7,6 +7,9 @@
     <a href='{{ path("fos_user_security_login") }}' ><button>Zaloguj</button> </a>
 {% endif %}
 
+{% if is_granted('ROLE_USER') %}
+    <a href='{{ path("fos_user_profile_edit") }}' ><button>{{ app.user.username }}</button> </a>
+{% endif %} 
 
 {% if is_granted('ROLE_ADMIN') %}
     <a href='{{ path("smallads_category_showallcategories") }}' ><button>Admin panel</button> </a>

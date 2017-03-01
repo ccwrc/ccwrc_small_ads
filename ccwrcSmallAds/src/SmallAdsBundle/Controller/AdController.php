@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use \DateTime;
 
 use SmallAdsBundle\Entity\Ad;
+use SmallAdsBundle\Entity\User;
 
 class AdController extends Controller {
 
@@ -27,7 +28,7 @@ class AdController extends Controller {
                 ->add("category", EntityType::class, [
                     "class" => "SmallAdsBundle:Category", "choice_label" => "name",
                     "label" => "Wybierz kategorię: "])
-                ->add("photoPath", "file", ["label" => "Wgraj foto (pliki: .jpg, .png)",
+                ->add("photoPath", "file", ["label" => "Wgraj foto (.gif, .jpg, .png)",
                     "data_class" => null,
                     "required" => false])
                 ->add("save", "submit", ["label" => "Zapisz"])
@@ -109,24 +110,48 @@ class AdController extends Controller {
      * @Route("/{id}/showAd", requirements={"id"="\d+"})
      */
     public function showAdAction($id) {
-        $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->container->get("security.context")->getToken()->getUser();
 
-        if ($ad == null) {
+        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
+                        . ' < a.endDate AND a.id = :id')->setParameter('id', $id);
+        $ad = $query->setMaxResults(1)->getOneOrNullResult();
+
+        if ($ad != null) {
+            return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
+                        "ad" => $ad
+            ));
+        }
+        // tylko ogłoszeniodawca lub admin mogą zobaczyć ogłoszenie archiwalne
+        $queryArchiv = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
+                        . ' > a.endDate AND a.id = :id')->setParameter('id', $id);
+        $adArchiv = $queryArchiv->setMaxResults(1)->getOneOrNullResult();
+
+        if (($ad == null) && ($adArchiv == null)) {
+            throw $this->createNotFoundException("Brak ogłoszenia o podanym ID");
+        } else if (($adArchiv != null) && ($user instanceof User) && ($user->hasRole('ROLE_ADMIN'))) {
+            return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
+                        "ad" => $adArchiv
+            ));
+        } else if (($adArchiv != null) && ($user instanceof User) && ($user === $adArchiv->getUser())) {
+            return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
+                        "ad" => $adArchiv
+            ));
+        } else if ($ad == null) {
             throw $this->createNotFoundException("Brak ogłoszenia o podanym ID");
         }
-
-        return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
-                    "ad" => $ad
-        ));
     }
 
     /**
      * @Route("/showAllAds")
      */
     public function showAllAdsAction() {
-        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
+                . ' < a.endDate ORDER BY a.endDate DESC');
+        $ads = $query->getResult();
         $categories = $this->getDoctrine()->getRepository("SmallAdsBundle:Category")->findAll();
-        //TODO przebudowac na zapytanie z porowaniem dat
+
         return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
                     "ads" => $ads,
                     "categories" => $categories
@@ -137,9 +162,13 @@ class AdController extends Controller {
      * @Route("/{id}/showAllAdsByCategory", requirements={"id"="\d+"})
      */
     public function showAllAdsByCategoryAction($id) {
-        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findByCategory($id);
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
+                        . ' < a.endDate AND a.category = :id ORDER BY a.endDate '
+                        . 'DESC')->setParameter('id', $id);
+        $ads = $query->getResult();
         $categories = $this->getDoctrine()->getRepository("SmallAdsBundle:Category")->findAll();
-        //TODO przebudowac na zapytanie z porowaniem dat
+
         return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
                     "ads" => $ads,
                     "categories" => $categories
@@ -180,8 +209,22 @@ class AdController extends Controller {
      * @Route("/regulations")
      */
     public function regulationsAction() {
-
         return $this->render('SmallAdsBundle:Ad:regulations.html.twig');
+    }
+    
+    /**
+     * @Route("/showAllArchivAds")
+     */
+    public function showAllArchivAdsAction() {
+        $this->denyAccessUnlessGranted("ROLE_ADMIN", null, "Dostęp zabroniony");
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
+                . ' > a.endDate ORDER BY a.endDate DESC');
+        $ads = $query->getResult();
+
+        return $this->render('SmallAdsBundle:Ad:show_all_archiv_ads.html.twig', array(
+                    "ads" => $ads
+        ));
     }
 
 }

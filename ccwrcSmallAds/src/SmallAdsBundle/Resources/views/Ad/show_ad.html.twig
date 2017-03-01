@@ -1,17 +1,18 @@
 {% extends "SmallAdsBundle:Main:base.html.twig" %}
 
-{% block title %}SmallAdsBundle:Ad:showAd{% endblock %}
+{% block title %}small ads - detale ogłoszenia{% endblock %}
 
 {% block body %}
 
     {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
-    
-    <h1>Welcome to the Ad:showAd page</h1>
 
-    <strong><i> {{ ad.title }} </i></strong><br/><br/>
-    <i> Ogłoszenie dodane przez: </i>{{ ad.user }} <br/><br/>
+
+    <h2><i> {{ ad.title }} </i></h2>
+    <i> Ogłoszenie dodane przez: </i>{{ ad.user }} <br/>
+    <i>Data wygaśnięcia: </i>{{ ad.endDate.date | date("d/m/Y H:i:s") }} <br/>
+    <i> Kategoria: </i>{{ ad.category }} <br/><br/>
+
     <i>Opis ogłoszenia: </i>{{ ad.description }} <br/><br/>
-    <i>Data wygaśnięcia: </i>{{ ad.endDate.date | date("d/m/Y H:i:s") }} <br/><br/>
 
     {% if ad.photoPath is not empty %}
         <strong><i> Foto </i></strong> <br/><br/>
@@ -29,12 +30,12 @@
 
     {% for comment in ad.comments %}
         <i>
-        {{ comment.date | date("d/m/Y H:i:s") }} Dodany przez:
-        {% if comment.user is not null %}
-            {{ comment.user }} 
-        {% else %}
-            Anonim
-        {% endif %} <br/>
+            {{ comment.date | date("d/m/Y H:i:s") }} Dodany przez:
+            {% if comment.user is not null %}
+                {{ comment.user }} 
+            {% else %}
+                Anonim
+            {% endif %} <br/>
         </i>
         {{ comment.text }}         
 

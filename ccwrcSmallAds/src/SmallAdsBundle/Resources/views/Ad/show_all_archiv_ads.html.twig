@@ -1,0 +1,20 @@
+{% extends "SmallAdsBundle:Main:base.html.twig" %}
+
+{% block title %}SmallAdsBundle:Ad:showAllAds{% endblock %}
+
+{% block body %}
+
+    {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
+    {% include 'SmallAdsBundle:Category:admin_menu.html.twig' %}
+
+    <h2>Ogłoszenia archiwalne</h2>
+    <hr/>
+
+    {% for ad in ads %}
+        <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">({{ ad.category }}) {{ ad.title }}</a>
+        <hr/>
+    {% else %}
+        Brak archiwalnych ogłoszeń
+    {% endfor %}
+
+{% endblock %}
