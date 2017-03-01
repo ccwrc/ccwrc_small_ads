@@ -31,6 +31,14 @@ class AdController extends Controller {
                 ->add("photoPath", "file", ["label" => "Wgraj foto (.gif, .jpg, .png)",
                     "data_class" => null,
                     "required" => false])
+                ->add("endDate", "choice", [
+                    "choices" => [
+                        "3 dni" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 3)),
+                        "4 dni" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 4)),
+                        "5 dni" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 5)),
+                        "6 dni" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 6)),
+                        "tydzień" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 7))
+                    ], "choices_as_values" => true, "label" => "Czas trwania: "])
                 ->add("save", "submit", ["label" => "Zapisz"])
                 ->getForm();
 
@@ -38,8 +46,6 @@ class AdController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $ad = $form->getData();
             $ad->setUser($user);
-            $ad->setEndDate(new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 7)));
-
             $photoPath = $ad->getPhotoPath();
             if ($photoPath) {
                 $photoName = date("YmdHis") . mt_rand(1, 9999) . "." . $photoPath->guessExtension();
