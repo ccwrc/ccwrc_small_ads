@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 01, 2017 at 02:02 PM
+-- Generation Time: Mar 01, 2017 at 11:13 PM
 -- Server version: 5.7.17-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.2
 
@@ -44,7 +44,6 @@ INSERT INTO `ad` (`id`, `user_id`, `category_id`, `title`, `description`, `photo
 (1, 2, 3, 'pierwsze edit3 edit33', 'pierwsze edit3', '20170228154653188.jpeg', '2017-02-05 13:25:00'),
 (2, 2, 2, 'pierwsze22', 'pierwsze22', NULL, '2017-03-05 13:26:04'),
 (3, 2, 6, 'testttttttt edit2', 'asdasd', NULL, '2017-03-05 14:26:30'),
-(5, 1, 1, '2 fdhgfdghf edit', '2 fhfghfhfgh edit', NULL, '2017-03-05 16:27:55'),
 (6, 2, 6, 'wsgftsdgf---------------------', 'sdfsdf', '201702261748402127.png', '2017-03-05 17:29:46'),
 (7, 1, 6, 'dla gołębi', 'dla gołębi', NULL, '2017-03-07 13:34:06'),
 (8, 1, 1, 'dla jenor', 'dla jednor', '201702282038424159.jpeg', '2017-03-07 13:34:24'),
@@ -58,7 +57,18 @@ INSERT INTO `ad` (`id`, `user_id`, `category_id`, `title`, `description`, `photo
 (16, 1, 7, 'Doris Day Glass Bottom Boat', 'film na VHS, 15$ za sztukę', '201702282036584307.gif', '2017-01-07 20:36:58'),
 (17, 1, 6, 'najnowsze', 'najnowxsze', NULL, '2017-03-07 21:46:05'),
 (18, 2, 1, 'jednorożec pospolity', 'jednorożec pospolity, zwykły, za grosze', '201703011257582058.gif', '2017-03-08 12:57:58'),
-(19, 2, 3, 'chomik w kocie, 2 w 1', 'niepowtarzalna okazja! dwa zwierzęta w jednej cenie w tym jedno z nich najedzone... 30zł', '201703011259443649.gif', '2017-03-08 12:59:44');
+(19, 2, 3, 'chomik w kocie, 2 w 1', 'niepowtarzalna okazja! dwa zwierzęta w jednej cenie w tym jedno z nich najedzone... 30zł', '201703011259443649.gif', '2017-03-08 12:59:44'),
+(20, 1, 6, 'do archiwummmm', 'wqewefe', NULL, '2017-02-08 16:01:48'),
+(21, 5, 3, 'grinpis', 'zielona siła edit', '201703011633437218.jpeg', '2017-03-08 16:32:04'),
+(22, 5, 6, 'sag', 'dsfgdsfgdg', '201703011635303355.jpeg', '2017-03-08 16:35:30'),
+(23, 1, 3, 'zwykłe ogłoszenie z długim tytułem', 'w3ww.kasd.kjc qaswd\'wijq\'wijdqd', '20170301180344599.gif', '2017-03-08 18:03:44'),
+(24, 4, 3, 'Kot i chomik w promocji - niesamowita okazja!', 'Dwa zwierzaki w jednej cenie, promocja jest bardzo ograniczona czasowo. Jedno ze zwierząt jest najedzone.\r\n\r\n20zł za wszystko, info pod numerem 123123123. Pozdrawiam', '201703011811049219.jpeg', '2017-03-08 18:11:04'),
+(25, 4, 1, 'nA 2 DNI', 'na 2 dni', NULL, '2017-03-03 21:27:24'),
+(26, 4, 3, 'na 4 dni', 'na 4 dni', '201703012132268278.jpeg', '2017-03-05 21:32:26'),
+(27, 4, 7, '33', '3333', '201703012137368427.png', '2017-03-08 21:37:36'),
+(28, 4, 6, 'sfdhgfds', 'fdshgfdhgh', NULL, '2017-03-04 21:45:49'),
+(29, 4, 4, 'fffffffffffffffffffffffffffffffff', 'fffffffffffffffffffffffffffffffffffff', 'ccwrcltd201703012146075166.jpeg', '2017-03-04 21:46:07'),
+(30, 4, 1, '5t', '5t', '4201703012148397422.jpeg', '2017-03-04 21:48:39');
 
 -- --------------------------------------------------------
 
@@ -127,10 +137,17 @@ INSERT INTO `comment` (`id`, `user_id`, `ad_id`, `date`, `text`) VALUES
 (27, NULL, 14, '2017-02-28 17:52:56', 'to już podchodzi pod spam'),
 (28, NULL, 14, '2017-02-28 17:54:00', 'new url'),
 (30, 1, 7, '2017-02-28 18:09:30', 'waefswfe'),
-(31, 1, 5, '2017-02-28 18:28:38', 'hhchchgc'),
 (32, 2, 15, '2017-02-28 20:29:59', 'ta pani jest ostra...'),
 (33, 4, 13, '2017-02-28 20:56:30', 'swfsdf'),
-(34, 2, 14, '2017-03-01 12:42:50', 'safsadf');
+(34, 2, 14, '2017-03-01 12:42:50', 'safsadf'),
+(35, 1, 8, '2017-03-01 16:09:26', 'dsfdsfvzsgsgsdrg'),
+(36, NULL, 8, '2017-03-01 16:16:39', 'anonimowy komentarz'),
+(37, NULL, 24, '2017-03-01 18:12:02', 'Czy chomik oddycha?'),
+(38, 5, 24, '2017-03-01 18:13:42', 'Dostajemy niepokojące sygnały nt. Pańskiego ogłoszenia. Prosimy o kontakt.'),
+(39, 4, 24, '2017-03-01 18:15:14', 'Spieszę z odpowiedzią: Kot żyje i ma się dobrze. dziękuję za zainteresowanie ogłoszeniem.'),
+(40, 4, 14, '2017-03-01 22:16:58', 'sfsdf444444'),
+(42, 2, 2, '2017-03-01 23:02:53', '111'),
+(43, 2, 2, '2017-03-01 23:13:13', 'walidacja daty');
 
 -- --------------------------------------------------------
 
@@ -158,10 +175,11 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@ccwrcuser.pl', 'ccwrcuser@ccwrcuser.pl', 1, NULL, '$2y$13$QppOYAnN2Aa9CCBGp/G0OuchtL0QrwFu/JSXu63c5SNsHVgDOZZyq', '2017-03-01 12:42:09', NULL, NULL, 'a:0:{}'),
-(2, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@ccwrcadmin.pl', 'ccwrcadmin@ccwrcadmin.pl', 1, NULL, '$2y$13$jICqqGaP8OWVjJtHXUClBOK54HZl2JLu/wFgfzL/WQnwQhp3DkPVS', '2017-03-01 12:42:37', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(1, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@ccwrcuser.pl', 'ccwrcuser@ccwrcuser.pl', 1, NULL, '$2y$13$QppOYAnN2Aa9CCBGp/G0OuchtL0QrwFu/JSXu63c5SNsHVgDOZZyq', '2017-03-01 18:02:41', NULL, NULL, 'a:0:{}'),
+(2, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@ccwrcadmin.pl', 'ccwrcadmin@ccwrcadmin.pl', 1, NULL, '$2y$13$jICqqGaP8OWVjJtHXUClBOK54HZl2JLu/wFgfzL/WQnwQhp3DkPVS', '2017-03-01 22:22:35', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
 (3, 'Mózg', 'mózg', 'mozg@mozg.pl99', 'mozg@mozg.pl99', 1, NULL, '$2y$13$9r5D3YVf/0RB3nK/biT56eFPKuTwLaDZY6Y/Inba6hFp.B.rkhJsS', '2017-02-28 13:58:29', NULL, NULL, 'a:0:{}'),
-(4, 'ccwrcltd', 'ccwrcltd', 'ccwrcltd@gmail.elo', 'ccwrcltd@gmail.elo', 1, NULL, '$2y$13$qC8H0v4.UsV/QH92fqWx7.y5R5ZeQDYoVXsHNC8q2OLLfHrI6FZ4O', '2017-02-28 20:56:14', NULL, NULL, 'a:0:{}');
+(4, 'ccwrcltd', 'ccwrcltd', 'ccwrcltd@gmail.elo', 'ccwrcltd@gmail.elo', 1, NULL, '$2y$13$qC8H0v4.UsV/QH92fqWx7.y5R5ZeQDYoVXsHNC8q2OLLfHrI6FZ4O', '2017-03-01 21:15:41', NULL, NULL, 'a:0:{}'),
+(5, 'greenpeace', 'greenpeace', 'tyyyt@wasssss.90ooo', 'tyyyt@wasssss.90ooo', 1, NULL, '$2y$13$XRD1qARbaBYofNq8uHDjSuXIk6CF8Qqhqm4rgCQ4CXGJMRBN4HBs6', '2017-03-01 18:12:28', NULL, NULL, 'a:0:{}');
 
 --
 -- Indexes for dumped tables
@@ -207,22 +225,22 @@ ALTER TABLE `fos_user`
 -- AUTO_INCREMENT for table `ad`
 --
 ALTER TABLE `ad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `fos_user`
 --
 ALTER TABLE `fos_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --

@@ -24,6 +24,7 @@ class Comment
     private $id;
 
     /**
+     * @Assert\DateTime()
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
