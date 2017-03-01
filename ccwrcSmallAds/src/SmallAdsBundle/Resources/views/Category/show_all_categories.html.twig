@@ -1,21 +1,24 @@
 {% extends "SmallAdsBundle:Main:base.html.twig" %}
 
-{% block title %}SmallAdsBundle:Category:showAllCategories{% endblock %}
+{% block title %}small ads - admin{% endblock %}
 
 {% block body %}
 
     {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
-
     {% include 'SmallAdsBundle:Category:admin_menu.html.twig' %}
-    <h1>Welcome to the Category:showAllCategories page</h1>
+    
+    <h2>Wszystkie kategorie</h2>
+    <hr/>
 
     <ul>
         {% for category in categories %}
             <li>
                 ID:  {{ category.id }}, Nazwa: {{ category.name }}, Ilość ogłoszeń: 
                 {{ category.ads | length }} <br/>
-                <a href="{{ path("smallads_category_editcategory", {"id":category.id}) }}">Edytuj</a> 
-                <a href="{{ path("smallads_category_deletecategory", {"id":category.id}) }}">Usuń</a> <br/><br/>
+                <a href="{{ path("smallads_category_editcategory", {"id":category.id}) }}">
+                    <button class="btn btn-info btn-xs">Edytuj</button></a> 
+                <a href="{{ path("smallads_category_deletecategory", {"id":category.id}) }}">
+                    <button class="btn btn-warning btn-xs">Usuń kategorię</button></a> <br/><br/>
             </li>   
         {% else %}
             Brak zapisanych kategorii

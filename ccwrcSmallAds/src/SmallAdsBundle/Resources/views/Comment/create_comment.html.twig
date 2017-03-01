@@ -1,10 +1,11 @@
 {% extends "SmallAdsBundle:Main:base.html.twig" %}
 
-{% block title %}SmallAdsBundle:Comment:createComment{% endblock %}
+{% block title %}small ads - dodawanie komentarza{% endblock %}
 
 {% block body %}
 
-    <h1>Welcome to the Comment:createComment page</h1>
+    <h2>Dodaj komentarz</h2>
+    <hr/>
 
     {{ form_start(commentForm) }}
     {{ form_widget(commentForm) }}

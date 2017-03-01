@@ -1,14 +1,14 @@
 {% extends "SmallAdsBundle:Main:base.html.twig" %}
 
-{% block title %}SmallAdsBundle:Category:createCategory{% endblock %}
+{% block title %}small ads - nowa kategoria{% endblock %}
 
 {% block body %}
 
     {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
-
     {% include 'SmallAdsBundle:Category:admin_menu.html.twig' %}
-    
-    <h1>Welcome to the Category:createCategory page</h1>
+
+    <h2>Nowa kategoria</h2>
+    <hr/>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}

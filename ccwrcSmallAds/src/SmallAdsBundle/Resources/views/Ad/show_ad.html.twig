@@ -1,29 +1,30 @@
 {% extends "SmallAdsBundle:Main:base.html.twig" %}
 
-{% block title %}small ads - detale ogłoszenia{% endblock %}
+{% block title %}small ads - detale i foto{% endblock %}
 
 {% block body %}
 
     {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
 
-
+    <hr/>
     <h2><i> {{ ad.title }} </i></h2>
     <i> Ogłoszenie dodane przez: </i>{{ ad.user }} <br/>
     <i>Data wygaśnięcia: </i>{{ ad.endDate.date | date("d/m/Y H:i:s") }} <br/>
     <i> Kategoria: </i>{{ ad.category }} <br/><br/>
 
-    <i>Opis ogłoszenia: </i>{{ ad.description }} <br/><br/>
+    <i>Opis: </i>{{ ad.description }} <br/><br/>
 
     {% if ad.photoPath is not empty %}
-        <strong><i> Foto </i></strong> <br/><br/>
-        <img src="{{ asset('/bundles/SmallAdsBundle/uploads_img/' ~ ad.photoPath) }}">
+        <strong><i> Foto </i></strong> <br/>
+        <img src="{{ asset('/bundles/SmallAdsBundle/uploads_img/' ~ ad.photoPath) }}" class="img-thumbnail">
     {% endif %}
+    <hr/>
 
-    <br/><br/>
-    <a href="{{ path("smallads_comment_createcomment", {"id":ad.id}) }}">Skomentuj ogłoszenie</a>
+    <a href="{{ path("smallads_comment_createcomment", {"id":ad.id}) }}">
+        <button class="btn btn-info btn-xs">Skomentuj ogłoszenie</button></a>
     <br/><br/>
 
-    {# na poxniej - dziala nie do konca zgodnie z zalozeniami#}
+    {# na poxniej - do przemyslenia #}
     {# {% render url('smallads_comment_createcomment', {'id': ad.id}) %}#}
     {# {{ render(controller('SmallAdsBundle:Comment:createComment', {'id': ad.id})) }}#}
     {# {% render controller('SmallAdsBundle:Comment:create_comment.html.twig', {"id": ad.id }) %}#}
@@ -42,8 +43,8 @@
         {% if app.user is not null and comment.user is not null %}
             {% if (app.user.id) == (comment.user.id) %} 
                 {# można ew. dodac opcje usuwania komentarzy przez właściciela ogłoszenia #}
-                <a href="{{ path("smallads_comment_deletecomment", {"id":comment.id, "adId":ad.id}) }}">Usuń</a>
-                <a href="{{ path("smallads_comment_editcomment", {"id":comment.id, "adId":ad.id}) }}">Edytuj</a>
+                <a href="{{ path("smallads_comment_deletecomment", {"id":comment.id, "adId":ad.id}) }}"><button class="btn btn-warning btn-xs">Usuń</button></a>
+                <a href="{{ path("smallads_comment_editcomment", {"id":comment.id, "adId":ad.id}) }}"><button class="btn btn-info btn-xs">Edytuj</button></a>
             {% endif %}
         {% endif %}
 

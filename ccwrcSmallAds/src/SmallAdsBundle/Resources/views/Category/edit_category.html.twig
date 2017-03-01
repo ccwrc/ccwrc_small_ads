@@ -1,13 +1,14 @@
 {% extends "SmallAdsBundle:Main:base.html.twig" %}
 
-{% block title %}SmallAdsBundle:Category:editCategory{% endblock %}
+{% block title %}small ads - edycja kategorii{% endblock %}
 
 {% block body %}
 
     {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
-
     {% include 'SmallAdsBundle:Category:admin_menu.html.twig' %}
-    <h1>Welcome to the Category:editCategory page</h1>
+    
+    <h2>Edycja kategorii</h2>
+    <hr/>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
