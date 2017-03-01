@@ -4,6 +4,8 @@ namespace SmallAdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Category
  *
@@ -22,6 +24,12 @@ class Category
     private $id;
 
     /**
+     * @Assert\Length(
+     * min = 3,
+     * max = 255,
+     * minMessage = "Minimalna ilość znaków to {{ limit }}",
+     * maxMessage = "Maksymalna ilość znaków to {{ limit }}"
+     * )
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
