@@ -98,7 +98,7 @@ class AdController extends Controller {
             if ($photoPath === null) {
                 $ad->setPhotoPath($oldPhotoName);
             } else {
-                $photoName = date("YmdHis") . mt_rand(1, 9999) . "." . $photoPath->guessExtension();
+                $photoName = $user->getId() . date("YmdHis") . mt_rand(1, 9999) . "." . $photoPath->guessExtension();
                 $photoPath->move($this->getParameter('uploads_img'), $photoName);
                 $ad->setPhotoPath($photoName);
             }
@@ -129,24 +129,21 @@ class AdController extends Controller {
                         "ad" => $ad
             ));
         }
-        // tylko ogłoszeniodawca lub admin mogą zobaczyć ogłoszenie archiwalne
+        // tylko ogłoszeniodawca lub administrator mogą zobaczyć ogłoszenie archiwalne
         $queryArchiv = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
                         . ' > a.endDate AND a.id = :id')->setParameter('id', $id);
         $adArchiv = $queryArchiv->setMaxResults(1)->getOneOrNullResult();
 
         if (($ad == null) && ($adArchiv == null)) {
             throw $this->createNotFoundException("Brak ogłoszenia o podanym ID");
-        } else if (($adArchiv != null) && ($user instanceof User) && ($user->hasRole('ROLE_ADMIN'))) {
+        } else if (($adArchiv != null) && ($user instanceof User) &&
+                (($user->hasRole('ROLE_ADMIN')) || (($user === $adArchiv->getUser())))) {
             return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
                         "ad" => $adArchiv
             ));
-        } else if (($adArchiv != null) && ($user instanceof User) && ($user === $adArchiv->getUser())) {
-            return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
-                        "ad" => $adArchiv
-            ));
-        } else if ($ad == null) {
+        } else {
             throw $this->createNotFoundException("Brak ogłoszenia o podanym ID");
-        } // nie ma else - wyczerpane wszystkie dopuszczalne możliwości
+        }
     }
 
     /**

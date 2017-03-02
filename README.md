@@ -11,5 +11,7 @@ Mini serwis lokalnych ogłoszeń drobnych. Projekt pisany przy użyciu Symfony 2
         - dynamiczne menu w zależności od typu zalogowanego użytkownika,
         - powiadamianie drogą mailową o nowych komentarzach,
         - przeglądanie historycznych ogłoszeń tylko przez administratora lub ogłoszeniodawcę
+
+![Alt text](https://images86.fotosik.pl/17/ff2d1cef5aad0e43.png "user screen")
         
 
