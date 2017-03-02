@@ -4,6 +4,8 @@ namespace SmallAdsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Ad
  *
@@ -22,6 +24,12 @@ class Ad
     private $id;
 
     /**
+     * @Assert\Length(
+     * min = 3,
+     * max = 60,
+     * minMessage = "Minimalna ilość znaków to {{ limit }}",
+     * maxMessage = "Maksymalna ilość znaków to {{ limit }}"
+     * )
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=60)
@@ -29,6 +37,12 @@ class Ad
     private $title;
 
     /**
+     * @Assert\Length(
+     * min = 3,
+     * max = 9500,
+     * minMessage = "Minimalna ilość znaków to {{ limit }}",
+     * maxMessage = "Maksymalna ilość znaków to {{ limit }}"
+     * )
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=9500, nullable=true)
@@ -36,6 +50,12 @@ class Ad
     private $description;
 
     /**
+     * @Assert\Image(
+     * maxWidth = 1280,
+     * maxHeight = 1024,
+     * maxWidthMessage ="Maksymalna szerokość zdjęcia to {{ max_width }} pikseli, obecne to {{ width }}",
+     * maxHeightMessage ="Maksymalna wysokość zdjęcia to {{ max_height }} pikseli, obecne to {{ height }}"
+     * )
      * @var string
      *
      * @ORM\Column(name="photoPath", type="string", length=255, nullable=true)
@@ -43,6 +63,7 @@ class Ad
     private $photoPath;
 
     /**
+     * @Assert\DateTime()
      * @var \DateTime
      *
      * @ORM\Column(name="endDate", type="datetime")

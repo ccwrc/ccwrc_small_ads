@@ -12,6 +12,20 @@ Mini serwis lokalnych ogłoszeń drobnych. Projekt pisany przy użyciu Symfony 2
         - powiadamianie drogą mailową o nowych komentarzach,
         - przeglądanie historycznych ogłoszeń tylko przez administratora lub ogłoszeniodawcę
 
-![Alt text](https://images86.fotosik.pl/17/ff2d1cef5aad0e43.png "user screen")
+
+Działanie wersji początkowej - panel administratora:
+![Alt text](https://images86.fotosik.pl/19/59fca987d6fcc30a.png "admin_screen")
+
+Działanie wersji początkowej - ogłoszenie użytkownika zalogowanego:
+![Alt text](https://images85.fotosik.pl/19/56dfd881b5129778.png "user_screen")
+
+Działanie wersji początkowej - widok użytkownika anonimowego:
+![Alt text](https://images85.fotosik.pl/19/62268bb666c37660.png "anonymous_screen")
+
+
+
+
+
+
         
 
