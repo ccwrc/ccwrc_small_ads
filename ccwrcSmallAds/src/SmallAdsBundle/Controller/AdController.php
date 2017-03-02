@@ -28,7 +28,7 @@ class AdController extends Controller {
                 ->add("category", EntityType::class, [
                     "class" => "SmallAdsBundle:Category", "choice_label" => "name",
                     "label" => "Wybierz kategorię: "])
-                ->add("photoPath", "file", ["label" => "Wgraj foto (.gif, .jpg, .png)",
+                ->add("photoPath", "file", ["label" => "Wgraj foto (max. 1280x1024px)",
                     "data_class" => null,
                     "required" => false])
                 ->add("endDate", "choice", [
@@ -117,22 +117,16 @@ class AdController extends Controller {
      * @Route("/{id}/showAd", requirements={"id"="\d+"})
      */
     public function showAdAction($id) {
-        $em = $this->getDoctrine()->getManager();
         $user = $this->container->get("security.context")->getToken()->getUser();
-
-        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
-                        . ' < a.endDate AND a.id = :id')->setParameter('id', $id);
-        $ad = $query->setMaxResults(1)->getOneOrNullResult();
+        $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findOneActiveAdById($id);
 
         if ($ad != null) {
             return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
                         "ad" => $ad
             ));
         }
-        // tylko ogłoszeniodawca lub administrator mogą zobaczyć ogłoszenie archiwalne
-        $queryArchiv = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
-                        . ' > a.endDate AND a.id = :id')->setParameter('id', $id);
-        $adArchiv = $queryArchiv->setMaxResults(1)->getOneOrNullResult();
+
+        $adArchiv = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findOneArchivAdById($id);
 
         if (($ad == null) && ($adArchiv == null)) {
             throw $this->createNotFoundException("Brak ogłoszenia o podanym ID");
