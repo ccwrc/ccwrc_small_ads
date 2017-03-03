@@ -144,10 +144,7 @@ class AdController extends Controller {
      * @Route("/showAllAds")
      */
     public function showAllAdsAction() {
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
-                . ' < a.endDate ORDER BY a.endDate DESC');
-        $ads = $query->getResult();
+        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAllActiveAds();
         $categories = $this->getDoctrine()->getRepository("SmallAdsBundle:Category")->findAll();
 
         return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
@@ -160,11 +157,7 @@ class AdController extends Controller {
      * @Route("/{id}/showAllAdsByCategory", requirements={"id"="\d+"})
      */
     public function showAllAdsByCategoryAction($id) {
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
-                        . ' < a.endDate AND a.category = :id ORDER BY a.endDate '
-                        . 'DESC')->setParameter('id', $id);
-        $ads = $query->getResult();
+        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAllActiveAdsByCategory($id);
         $categories = $this->getDoctrine()->getRepository("SmallAdsBundle:Category")->findAll();
 
         return $this->render('SmallAdsBundle:Ad:show_all_ads.html.twig', array(
@@ -202,23 +195,20 @@ class AdController extends Controller {
 
         return $this->redirectToRoute("smallads_ad_showalladsbyuser");
     }
-    
+
     /**
      * @Route("/regulations")
      */
     public function regulationsAction() {
         return $this->render('SmallAdsBundle:Ad:regulations.html.twig');
     }
-    
+
     /**
      * @Route("/showAllArchivAds")
      */
     public function showAllArchivAdsAction() {
         $this->denyAccessUnlessGranted("ROLE_ADMIN", null, "Dostęp zabroniony");
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
-                . ' > a.endDate ORDER BY a.endDate DESC');
-        $ads = $query->getResult();
+        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAllArchiveAds();
 
         return $this->render('SmallAdsBundle:Ad:show_all_archiv_ads.html.twig', array(
                     "ads" => $ads

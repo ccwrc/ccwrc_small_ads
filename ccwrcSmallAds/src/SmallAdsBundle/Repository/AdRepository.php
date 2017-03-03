@@ -26,4 +26,26 @@ class AdRepository extends EntityRepository {
         return $queryArchiv->setMaxResults(1)->getOneOrNullResult();
     }
 
+    public function findAllActiveAds() {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
+                . ' < a.endDate ORDER BY a.endDate DESC');
+        return $query->getResult();
+    }
+    
+    public function findAllActiveAdsByCategory($id) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
+                        . ' < a.endDate AND a.category = :id ORDER BY a.endDate '
+                        . 'DESC')->setParameter('id', $id);
+        return $query->getResult();
+    }
+
+    public function findAllArchiveAds() {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE CURRENT_TIMESTAMP()'
+                . ' > a.endDate ORDER BY a.endDate DESC');
+        return $query->getResult();
+    }
+
 }
