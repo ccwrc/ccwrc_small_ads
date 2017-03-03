@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 01, 2017 at 11:13 PM
+-- Generation Time: Mar 03, 2017 at 02:36 PM
 -- Server version: 5.7.17-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.2
 
@@ -44,9 +44,8 @@ INSERT INTO `ad` (`id`, `user_id`, `category_id`, `title`, `description`, `photo
 (1, 2, 3, 'pierwsze edit3 edit33', 'pierwsze edit3', '20170228154653188.jpeg', '2017-02-05 13:25:00'),
 (2, 2, 2, 'pierwsze22', 'pierwsze22', NULL, '2017-03-05 13:26:04'),
 (3, 2, 6, 'testttttttt edit2', 'asdasd', NULL, '2017-03-05 14:26:30'),
-(6, 2, 6, 'wsgftsdgf---------------------', 'sdfsdf', '201702261748402127.png', '2017-03-05 17:29:46'),
-(7, 1, 6, 'dla gołębi', 'dla gołębi', NULL, '2017-03-07 13:34:06'),
-(8, 1, 1, 'dla jenor', 'dla jednor', '201702282038424159.jpeg', '2017-03-07 13:34:24'),
+(7, 1, 6, 'dla gołębi', 'dla gołębi', NULL, '2017-01-07 13:34:06'),
+(8, 1, 1, 'dla jenor', 'dla jednor', '1201703021318132421.jpeg', '2017-03-07 13:34:24'),
 (9, 3, 4, 'Pierwszy plan', 'Bardzo dobry plan, na pewno zadziała. 30zł płatne z góry na konto słupa.', '201702281359179846.jpeg', '2017-03-07 13:59:17'),
 (10, 3, 4, 'drugi plan', 'jeszcze lepszy niz pierwszy', NULL, '2017-03-07 14:08:50'),
 (11, 3, 1, 'pluszowy jednorozec mutant', 'ma 2 rogi i muczy', NULL, '2017-03-07 14:10:21'),
@@ -68,7 +67,11 @@ INSERT INTO `ad` (`id`, `user_id`, `category_id`, `title`, `description`, `photo
 (27, 4, 7, '33', '3333', '201703012137368427.png', '2017-03-08 21:37:36'),
 (28, 4, 6, 'sfdhgfds', 'fdshgfdhgh', NULL, '2017-03-04 21:45:49'),
 (29, 4, 4, 'fffffffffffffffffffffffffffffffff', 'fffffffffffffffffffffffffffffffffffff', 'ccwrcltd201703012146075166.jpeg', '2017-03-04 21:46:07'),
-(30, 4, 1, '5t', '5t', '4201703012148397422.jpeg', '2017-03-04 21:48:39');
+(30, 4, 1, '5t', '5t', '4201703012148397422.jpeg', '2017-03-04 21:48:39'),
+(31, 1, 6, 'asdfsdf', 'sdfsdfsdf', NULL, '2017-03-07 14:37:05'),
+(32, 1, 6, 'dsfg', 'sdsfsfsd', NULL, '2017-03-05 14:39:37'),
+(33, 1, 6, '2www', '2www', '1201703021448238083.jpeg', '2017-03-09 14:48:23'),
+(34, 2, 4, 'z gifem', 'z gifem', '2201703021552012835.gif', '2017-03-05 15:52:00');
 
 -- --------------------------------------------------------
 
@@ -119,7 +122,6 @@ INSERT INTO `comment` (`id`, `user_id`, `ad_id`, `date`, `text`) VALUES
 (6, 1, 2, '2017-02-26 22:14:32', 'nowyyy'),
 (7, NULL, 2, '2017-02-26 22:17:56', 'bla222'),
 (8, NULL, 1, '2017-02-26 22:18:53', 'jytdydydydydy0000'),
-(10, 2, 6, '2017-02-26 22:38:38', 'fgfgfgfgfgfgf'),
 (11, NULL, 1, '2017-02-27 18:00:07', 'nowy koment 27'),
 (14, 1, 1, '2017-02-27 21:57:26', 'bla zalogowany po edycji'),
 (15, NULL, 3, '2017-02-27 22:29:10', 'anonimmmmmm'),
@@ -175,8 +177,8 @@ CREATE TABLE `fos_user` (
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@ccwrcuser.pl', 'ccwrcuser@ccwrcuser.pl', 1, NULL, '$2y$13$QppOYAnN2Aa9CCBGp/G0OuchtL0QrwFu/JSXu63c5SNsHVgDOZZyq', '2017-03-01 18:02:41', NULL, NULL, 'a:0:{}'),
-(2, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@ccwrcadmin.pl', 'ccwrcadmin@ccwrcadmin.pl', 1, NULL, '$2y$13$jICqqGaP8OWVjJtHXUClBOK54HZl2JLu/wFgfzL/WQnwQhp3DkPVS', '2017-03-01 22:22:35', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
+(1, 'ccwrcuser', 'ccwrcuser', 'ccwrcuser@ccwrcuser.pl', 'ccwrcuser@ccwrcuser.pl', 1, NULL, '$2y$13$QppOYAnN2Aa9CCBGp/G0OuchtL0QrwFu/JSXu63c5SNsHVgDOZZyq', '2017-03-02 21:49:49', NULL, NULL, 'a:0:{}'),
+(2, 'ccwrcadmin', 'ccwrcadmin', 'ccwrcadmin@ccwrcadmin.pl', 'ccwrcadmin@ccwrcadmin.pl', 1, NULL, '$2y$13$jICqqGaP8OWVjJtHXUClBOK54HZl2JLu/wFgfzL/WQnwQhp3DkPVS', '2017-03-03 13:14:35', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}'),
 (3, 'Mózg', 'mózg', 'mozg@mozg.pl99', 'mozg@mozg.pl99', 1, NULL, '$2y$13$9r5D3YVf/0RB3nK/biT56eFPKuTwLaDZY6Y/Inba6hFp.B.rkhJsS', '2017-02-28 13:58:29', NULL, NULL, 'a:0:{}'),
 (4, 'ccwrcltd', 'ccwrcltd', 'ccwrcltd@gmail.elo', 'ccwrcltd@gmail.elo', 1, NULL, '$2y$13$qC8H0v4.UsV/QH92fqWx7.y5R5ZeQDYoVXsHNC8q2OLLfHrI6FZ4O', '2017-03-01 21:15:41', NULL, NULL, 'a:0:{}'),
 (5, 'greenpeace', 'greenpeace', 'tyyyt@wasssss.90ooo', 'tyyyt@wasssss.90ooo', 1, NULL, '$2y$13$XRD1qARbaBYofNq8uHDjSuXIk6CF8Qqhqm4rgCQ4CXGJMRBN4HBs6', '2017-03-01 18:12:28', NULL, NULL, 'a:0:{}');
@@ -225,12 +227,12 @@ ALTER TABLE `fos_user`
 -- AUTO_INCREMENT for table `ad`
 --
 ALTER TABLE `ad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `comment`
 --

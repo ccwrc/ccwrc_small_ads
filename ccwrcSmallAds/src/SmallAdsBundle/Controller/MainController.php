@@ -12,9 +12,7 @@ class MainController extends Controller
      */
     public function indexAction() {
         
-        return $this->render('SmallAdsBundle:Main:index.html.twig', array(
-            // ...
-        ));
+        return $this->render('SmallAdsBundle:Main:index.html.twig');
     }
 
 }
