@@ -40,7 +40,6 @@ class AdController extends Controller {
                         "tydzień" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 7))
                     ],
                     "choices_as_values" => true, "label" => "Czas trwania: "])
-                ->add("save", "submit", ["label" => "Zapisz"])
                 ->getForm();
 
         $form->handleRequest($req);
