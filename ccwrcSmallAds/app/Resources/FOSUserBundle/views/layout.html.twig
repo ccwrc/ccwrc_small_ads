@@ -24,14 +24,16 @@
     <body>
         <div class="container">
             {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
+            <hr/>
+            
             <div>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                    <a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <br/><br/>
+{#                    <a href="{{ path('fos_user_security_logout') }}">
                         {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                    </a>
+                    </a>#}
                 {% else %}
-                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                   {# <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>#}
                 {% endif %}
             </div>
 
@@ -49,6 +51,7 @@
                 {% block fos_user_content %}
                 {% endblock fos_user_content %}
             </div>
+            <hr/>
         </div>
     </body>
 </html>
