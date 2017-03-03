@@ -26,7 +26,6 @@ class CommentController extends Controller {
         $commentForm = $this->createFormBuilder($comment)
                 ->setMethod("POST")
                 ->add("text", "textarea", ["label" => "Skomentuj ogłoszenie: "])
-                ->add("save", "submit", ["label" => "Zapisz"])
                 ->getForm();
 
         $commentForm->handleRequest($req);
@@ -66,7 +65,6 @@ class CommentController extends Controller {
         $commentForm = $this->createFormBuilder($comment)
                 ->setMethod("POST")
                 ->add("text", "textarea", ["label" => "Edytuj komentarz: "])
-                ->add("save", "submit", ["label" => "Zapisz"])
                 ->getForm();
 
         $commentForm->handleRequest($req);

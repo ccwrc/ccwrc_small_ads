@@ -20,7 +20,6 @@ class CategoryController extends Controller {
         $form = $this->createFormBuilder($category)
                 ->setMethod("POST")
                 ->add("name", "text", ["label" => "Podaj nazwę kategorii: "])
-                ->add("save", "submit", ["label" => "Zapisz"])
                 ->getForm();
 
         $form->handleRequest($req);
@@ -51,7 +50,6 @@ class CategoryController extends Controller {
         $form = $this->createFormBuilder($category)
                 ->setMethod("POST")
                 ->add("name", "text", ["label" => "Edytuj nazwę kategorii: "])
-                ->add("save", "submit", ["label" => "Zapisz"])
                 ->getForm();
 
         $form->handleRequest($req);

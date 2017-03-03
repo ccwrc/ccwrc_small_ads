@@ -87,7 +87,6 @@ class AdController extends Controller {
                 ->add("photoPath", "file", ["label" => "Wgraj inne zdjęcie: ",
                     "data_class" => null,
                     "required" => false])
-                ->add("save", "submit", ["label" => "Zapisz"])
                 ->getForm();
 
         $form->handleRequest($req);
