@@ -8,16 +8,17 @@
 
     <h2>Ogłoszenia drobne</h2>
 
-    Wybierz kategorię ogłoszeń 
-    <select name="Wybierz kategorię" onchange="location = this.value;">
-        <option>z listy</option>
+    Wybierz kategorię ogłoszeń z listy
+    <select onchange="location = this.value;">
+       <option value="{{ path("smallads_ad_showallads")}}">wybierz:</option>
         {% for category in categories %}
             <option value="{{ path("smallads_ad_showalladsbycategory", {"id":category.id}) }}">
-                {{ category.name }} {#({{ category.ads | length }})#}
+                {{ category.name }} ({{ category.ads | length }})
             </option> {#TODO licznik liczy rowniez archiwalne - do przemyslenia#}
         {% else %}
             Brak zapisanych kategorii
         {% endfor %}
+        <option value="{{ path("smallads_ad_showallads")}}">WSZYSTKIE</option>
     </select> <br/><br/>
     <hr/>
 

@@ -19,24 +19,12 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-
     </head>
     <body>
         <div class="container">
             {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %} <br/><br/>
             {{ include('@FOSUser/fos_user_menu.html.twig') }}
             <hr/>
-
-{#            <div>
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <br/><br/>
-                    <a href="{{ path('fos_user_security_logout') }}">
-                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                    </a>
-                {% else %}
-                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                {% endif %}
-            </div>#}
 
             {% if app.request.hasPreviousSession %}
                 {% for type, messages in app.session.flashbag.all() %}
@@ -52,6 +40,7 @@
                 {% block fos_user_content %}
                 {% endblock fos_user_content %}
             </div>
+            
             <hr/>
         </div>
     </body>

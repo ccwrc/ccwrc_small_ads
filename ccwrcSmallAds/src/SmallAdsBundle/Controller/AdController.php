@@ -116,7 +116,8 @@ class AdController extends Controller {
      */
     public function showAdAction($id) {
         $user = $this->container->get("security.context")->getToken()->getUser();
-        $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findOneActiveAdById($id);
+        $adRepo = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad");
+        $ad = $adRepo->findOneActiveAdById($id);
 
         if ($ad != null) {
             return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
@@ -124,11 +125,9 @@ class AdController extends Controller {
             ));
         }
 
-        $adArchiv = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findOneArchivAdById($id);
+        $adArchiv = $adRepo->findOneArchivAdById($id);
 
-        if (($ad == null) && ($adArchiv == null)) {
-            throw $this->createNotFoundException("Brak ogłoszenia o podanym ID");
-        } else if (($adArchiv != null) && ($user instanceof User) &&
+        if (($adArchiv != null) && ($user instanceof User) &&
                 (($user->hasRole('ROLE_ADMIN')) || (($user === $adArchiv->getUser())))) {
             return $this->render('SmallAdsBundle:Ad:show_ad.html.twig', array(
                         "ad" => $adArchiv
