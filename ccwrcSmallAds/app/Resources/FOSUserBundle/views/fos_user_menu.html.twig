@@ -1,0 +1,34 @@
+
+<a href='{{ path("smallads_main_index") }}' ><button class="btn btn-primary btn-sm">Strona główna</button> </a>
+
+{% if is_granted('ROLE_USER') %}
+    <a href='{{ path("fos_user_security_logout") }}' ><button  class="btn btn-primary btn-sm">Wyloguj</button> </a>
+{% else %}
+    <a href='{{ path("fos_user_security_login") }}' ><button class="btn btn-primary btn-sm">Zaloguj</button> </a>
+{% endif %}
+
+{% if is_granted('ROLE_USER') %}
+    <a href='{{ path("fos_user_profile_edit") }}' ><button class="btn btn-primary btn-sm">{{ app.user.username }}</button> </a>
+{% endif %} 
+
+{% if is_granted('ROLE_ADMIN') %}
+    <a href='{{ path("smallads_category_showallcategories") }}' ><button class="btn btn-primary btn-sm btn-danger">Admin panel</button> </a>
+{% elseif is_granted('ROLE_USER') %}
+    <a href='{{ path("smallads_ad_showalladsbyuser") }}' ><button class="btn btn-primary btn-sm">Moje ogłoszenia</button> </a>    
+{% else %}
+    <a href='{{ path("fos_user_registration_register") }}' ><button class="btn btn-primary btn-sm">Zarejestruj</button> </a>
+{% endif %}
+
+{% if is_granted('ROLE_USER') %}
+    <a href='{{ path("smallads_ad_createad") }}' ><button class="btn btn-primary btn-sm">Dodaj ogłoszenie</button> </a>
+{% else %}
+    <a href='{{ path("fos_user_resetting_request") }}' ><button class="btn btn-primary btn-sm">Przypomnij hasło</button> </a>
+{% endif %}
+
+{% if is_granted('ROLE_ADMIN') %}
+    <a href='{{ path("smallads_ad_showalladsbyuser") }}' ><button class="btn btn-primary btn-sm">Moje ogłoszenia</button> </a>   
+{% else %}
+    <a href='{{ path("smallads_ad_regulations") }}' ><button class="btn btn-primary btn-sm">Regualmin, FAQ</button> </a>
+{% endif %}
+
+<a href='{{ path("smallads_ad_showallads") }}' ><button class="btn btn-primary btn-sm">Wszystkie ogłoszenia</button> </a>
