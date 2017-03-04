@@ -8,7 +8,7 @@
 {% endif %}
 
 {% if is_granted('ROLE_USER') %}
-    <a href='{{ path("fos_user_profile_edit") }}' ><button class="btn btn-primary btn-sm">{{ app.user.username }}</button> </a>
+    <a href='{{ path("fos_user_profile_edit") }}' ><button class="btn btn-primary btn-sm btn-danger">{{ app.user.username }}</button> </a>
 {% endif %} 
 
 {% if is_granted('ROLE_ADMIN') %}
@@ -22,7 +22,7 @@
 {% if is_granted('ROLE_USER') %}
     <a href='{{ path("smallads_ad_createad") }}' ><button class="btn btn-primary btn-sm">Dodaj ogłoszenie</button> </a>
 {% else %}
-    <a href='{{ path("fos_user_resetting_request") }}' ><button class="btn btn-primary btn-sm">Przypomnij hasło</button> </a>
+    <a href='{{ path("fos_user_resetting_request") }}' ><button class="btn btn-primary btn-sm">Resetuj hasło</button> </a>
 {% endif %}
 
 {% if is_granted('ROLE_ADMIN') %}
