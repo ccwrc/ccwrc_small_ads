@@ -72,5 +72,5 @@ fos_user:
     firewall_name: main
     user_class: SmallAdsBundle\Entity\User
     from_email:
-        address: ccwrctest@ccwrctest.pl
-        sender_name: ccwrctest   
+        address: smalladsbundle@gmail.com
+        sender_name: Small Ads  

@@ -20,14 +20,7 @@
     {% endif %}
     <hr/>
 
-    <a href="{{ path("smallads_comment_createcomment", {"id":ad.id}) }}">
-        <button class="btn btn-info btn-xs">Skomentuj ogłoszenie</button></a>
-    <br/><br/>
-
-    {# na poxniej - do przemyslenia #}
-    {# {% render url('smallads_comment_createcomment', {'id': ad.id}) %}#}
-    {# {{ render(controller('SmallAdsBundle:Comment:createComment', {'id': ad.id})) }}#}
-    {# {% render controller('SmallAdsBundle:Comment:create_comment.html.twig', {"id": ad.id }) %}#}
+    {% render url('smallads_comment_createcomment', {'id': ad.id}) %}
 
     {% for comment in ad.comments %}
         <i>

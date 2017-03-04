@@ -1,21 +1,16 @@
-{% extends "SmallAdsBundle:Main:base.html.twig" %}
 
-{% block title %}small ads - dodawanie komentarza{% endblock %}
 
-{% block body %}
-    
-    {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
+<div class="form-inline">
+    <div class="form-group">
+        {{ form_start(commentForm) }} 
+        {{ form_widget(commentForm) }}  
+    </div>
+    <input class="btn btn-primary btn-sm" type="submit" value="Dodaj komentarz"/>
+</div>
+{{ form_end(commentForm) }}
 
-    <h2>Dodaj komentarz</h2>
-    <hr/>
+<hr/>
 
-    {{ form_start(commentForm) }}
-    {{ form_widget(commentForm) }}
-    <input class="btn btn-primary btn-sm" type="submit" value="Dodaj"/>
-    {{ form_end(commentForm) }}
-    
-    <hr/>
 
-{% endblock %}
 
 

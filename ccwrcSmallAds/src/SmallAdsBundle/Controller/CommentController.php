@@ -24,8 +24,9 @@ class CommentController extends Controller {
         $comment = new Comment();
 
         $commentForm = $this->createFormBuilder($comment)
-                ->setMethod("POST") //ust akcje i wio
-                ->add("text", "textarea", ["label" => "Skomentuj ogłoszenie: "])
+                ->setAction($this->generateUrl("smallads_comment_createcomment", ["id" => $id]))
+                ->setMethod("POST")
+                ->add("text", "text", ["label" => "Skomentuj: "])
                 ->getForm();
 
         $commentForm->handleRequest($req);
@@ -39,14 +40,14 @@ class CommentController extends Controller {
             $em->flush();
             // powiadomienie mailowe o nowym komentarzu
             $adTitle = $ad->getTitle();
-            $userEmail = $ad->getUser()->getEmail();    
+            $userEmail = $ad->getUser()->getEmail();
             $this->sendInfoMail($userEmail, $adTitle);
-            
+
             return $this->redirectToRoute("smallads_ad_showad", ["id" => $id]);
         }
 
         return $this->render('SmallAdsBundle:Comment:create_comment.html.twig', array(
-                    "commentForm" => $commentForm->createView()
+                    "commentForm" => $commentForm->createView(),
         ));
     }
 
@@ -96,7 +97,7 @@ class CommentController extends Controller {
 
         return $this->redirectToRoute("smallads_ad_showad", ["id" => $adId]);
     }
-    
+
     private function sendInfoMail($userEmail, $adTitle) {
         $message = \Swift_Message::newInstance()
                 ->setSubject($adTitle . " - nowy komentarz do ogłoszenia")
