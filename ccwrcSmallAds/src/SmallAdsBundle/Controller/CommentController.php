@@ -24,7 +24,7 @@ class CommentController extends Controller {
         $comment = new Comment();
 
         $commentForm = $this->createFormBuilder($comment)
-                ->setMethod("POST")
+                ->setMethod("POST") //ust akcje i wio
                 ->add("text", "textarea", ["label" => "Skomentuj ogłoszenie: "])
                 ->getForm();
 

@@ -21,7 +21,7 @@
         <option value="{{ path("smallads_ad_showallads")}}">WSZYSTKIE</option>
     </select> <br/><br/>
     <hr/>
-
+    {{ dump(ads) }} {{ dump() }}
     {% for ad in ads %}
         ({{ ad.category }}) 
         <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }}</a>

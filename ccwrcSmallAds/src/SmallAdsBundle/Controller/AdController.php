@@ -10,6 +10,7 @@ use \DateTime;
 
 use SmallAdsBundle\Entity\Ad;
 use SmallAdsBundle\Entity\User;
+use SmallAdsBundle\Entity\Category;
 
 class AdController extends Controller {
 
