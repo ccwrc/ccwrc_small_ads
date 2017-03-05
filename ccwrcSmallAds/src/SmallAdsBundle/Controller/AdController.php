@@ -67,6 +67,10 @@ class AdController extends Controller {
             if ($photoPath === null) {
                 $ad->setPhotoPath($oldPhotoName);
             } else {
+                if ($oldPhotoName) {
+                    $photoToDelete = $this->getParameter("uploads_img") . "/" . $oldPhotoName;
+                    unlink($photoToDelete);
+                }
                 $photoName = $user->getId() . date("YmdHis") . mt_rand(1, 9999) . "." . $photoPath->guessExtension();
                 $photoPath->move($this->getParameter('uploads_img'), $photoName);
                 $ad->setPhotoPath($photoName);
@@ -154,7 +158,7 @@ class AdController extends Controller {
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
         $user = $this->container->get("security.context")->getToken()->getUser();
         $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
-        // http://symfony.com/doc/current/components/filesystem.html
+       
         if ($user === $ad->getUser()) {
             if ($ad->getPhotoPath()) {
                 $photoToDelete = $this->getParameter("uploads_img") . "/" . $ad->getPhotoPath();
