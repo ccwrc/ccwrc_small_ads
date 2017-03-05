@@ -9,6 +9,7 @@ use DateTime;
 
 use SmallAdsBundle\Entity\Comment;
 use SmallAdsBundle\Entity\User;
+use SmallAdsBundle\Form\CommentType;
 
 class CommentController extends Controller {
 
@@ -23,11 +24,14 @@ class CommentController extends Controller {
         $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
         $comment = new Comment();
 
-        $commentForm = $this->createFormBuilder($comment)
-                ->setAction($this->generateUrl("smallads_comment_createcomment", ["id" => $id]))
-                ->setMethod("POST")
-                ->add("text", "text", ["label" => "Skomentuj: "])
-                ->getForm();
+
+     $commentForm = $this->createForm(CommentType::class, $comment, ["action" => $this->generateUrl("smallads_comment_createcomment", ["id" => $id])]);
+    
+//        $commentForm = $this->createFormBuilder($comment)
+//                ->setAction($this->generateUrl("smallads_comment_createcomment", ["id" => $id]))
+//                ->setMethod("POST")
+//                ->add("text", "text", ["label" => "Skomentuj: "])
+//                ->getForm();
 
         $commentForm->handleRequest($req);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
