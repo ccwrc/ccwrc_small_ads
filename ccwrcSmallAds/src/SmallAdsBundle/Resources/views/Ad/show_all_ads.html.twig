@@ -6,22 +6,22 @@
 
     {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
 
-    <h2>Ogłoszenia drobne</h2>
+    <h2>Ogłoszenia drobne</h2>   
 
     Wybierz kategorię ogłoszeń z listy
     <select onchange="location = this.value;">
-       <option value="{{ path("smallads_ad_showallads")}}">wybierz:</option>
-        {% for category in categories %}
+        <option>wybierz:</option>
+        {% for category in categories %}   
             <option value="{{ path("smallads_ad_showalladsbycategory", {"id":category.id}) }}">
-                {{ category.name }} ({{ category.ads | length }})
-            </option> {#TODO licznik liczy rowniez archiwalne - do przemyslenia#}
+                {{ category.name }} {#({{ category.ads | length }})#} 
+            </option> {# powyzszy licznik z archiwalnymi - raczej niepotrzebny#}
         {% else %}
             Brak zapisanych kategorii
         {% endfor %}
-        <option value="{{ path("smallads_ad_showallads")}}">WSZYSTKIE</option>
+        <option value="{{ path("smallads_ad_showallads")}}">Wszystkie katagorie</option>
     </select> <br/><br/>
     <hr/>
-    {{ dump(ads) }} {{ dump() }}
+
     {% for ad in ads %}
         ({{ ad.category }}) 
         <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }}</a>
