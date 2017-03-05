@@ -6,7 +6,7 @@
 
     {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
     {% include 'SmallAdsBundle:Category:admin_menu.html.twig' %}
-    
+
     <h2>Wszystkie kategorie</h2>
     <hr/>
 
@@ -17,8 +17,10 @@
                 {{ category.ads | length }} <br/>
                 <a href="{{ path("smallads_category_editcategory", {"id":category.id}) }}">
                     <button class="btn btn-info btn-xs">Edytuj</button></a> 
-                <a href="{{ path("smallads_category_deletecategory", {"id":category.id}) }}">
-                    <button class="btn btn-warning btn-xs">Usuń kategorię</button></a> <br/><br/>
+                    {% if category.ads is empty %}
+                    <a href="{{ path("smallads_category_deletecategory", {"id":category.id}) }}">
+                        <button class="btn btn-warning btn-xs">Usuń kategorię</button></a> <br/><br/>
+                    {% endif %}
             </li>   
         {% else %}
             Brak zapisanych kategorii

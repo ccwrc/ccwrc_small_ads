@@ -19,10 +19,6 @@ class CategoryController extends Controller {
 
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
-//        $form = $this->createFormBuilder($category)
-//                ->setMethod("POST")
-//                ->add("name", "text", ["label" => "Podaj nazwę kategorii: "])
-//                ->getForm();
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -49,10 +45,7 @@ class CategoryController extends Controller {
             throw $this->createNotFoundException("Brak ID w bazie");
         }
 
-        $form = $this->createFormBuilder($category)
-                ->setMethod("POST")
-                ->add("name", "text", ["label" => "Edytuj nazwę kategorii: "])
-                ->getForm();
+        $form = $this->createForm(CategoryType::class, $category);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -89,7 +82,7 @@ class CategoryController extends Controller {
         if ($category == null) {
             throw $this->createNotFoundException("Brak ID w bazie");
         }
-
+    //TODO dodac poxniej ifa -> nie jesli sa ogloszenia aktywne
         $em = $this->getDoctrine()->getManager();
         $em->remove($category);
         $em->flush();
