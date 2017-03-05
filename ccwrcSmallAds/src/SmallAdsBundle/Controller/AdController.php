@@ -5,12 +5,10 @@ namespace SmallAdsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-// use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use \DateTime;
 
 use SmallAdsBundle\Entity\Ad;
 use SmallAdsBundle\Entity\User;
-// use SmallAdsBundle\Entity\Category;
 use SmallAdsBundle\Form\AdType;
 use SmallAdsBundle\Form\AdEditType;
 
@@ -23,29 +21,7 @@ class AdController extends Controller {
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
         $user = $this->container->get("security.context")->getToken()->getUser();
         $ad = new Ad();
-        
-      $form = $this->createForm(AdType::class, $ad);
-
-//        $form = $this->createFormBuilder($ad)
-//                ->setMethod("POST")
-//                ->add("title", "text", ["label" => "Podaj tytuł: "])
-//                ->add("description", "textarea", ["label" => "Dodaj opis: "])
-//                ->add("category", EntityType::class, [
-//                    "class" => "SmallAdsBundle:Category", "choice_label" => "name",
-//                    "label" => "Wybierz kategorię: "])
-//                ->add("photoPath", "file", ["label" => "Wgraj foto (max. 1280x1024px)",
-//                    "data_class" => null,
-//                    "required" => false])
-//                ->add("endDate", "choice", [
-//                    "choices" => [
-//                        "3 dni" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 3)),
-//                        "4 dni" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 4)),
-//                        "5 dni" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 5)),
-//                        "6 dni" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 6)),
-//                        "tydzień" => new dateTime(date("Y-m-d H:i:s", time() + 3600 * 24 * 7))
-//                    ],
-//                    "choices_as_values" => true, "label" => "Czas trwania: "])
-//                ->getForm();
+        $form = $this->createForm(AdType::class, $ad);
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -83,17 +59,6 @@ class AdController extends Controller {
         }
 
         $form = $this->createForm(AdEditType::class, $ad);
-//        $form = $this->createFormBuilder($ad)
-//                ->setMethod("POST")
-//                ->add("title", "text", ["label" => "Edytuj tytuł: "])
-//                ->add("description", "textarea", ["label" => "Edytuj opis: "])
-//                ->add("category", EntityType::class, [
-//                    "class" => "SmallAdsBundle:Category", "choice_label" => "name",
-//                    "label" => "Zmień kategorię: "])
-//                ->add("photoPath", "file", ["label" => "Wgraj inne zdjęcie: ",
-//                    "data_class" => null,
-//                    "required" => false])
-//                ->getForm();
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {

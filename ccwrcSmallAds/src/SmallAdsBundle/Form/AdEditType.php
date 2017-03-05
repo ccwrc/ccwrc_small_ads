@@ -2,7 +2,6 @@
 
 namespace SmallAdsBundle\Form;
 
-// use SmallAdsBundle\Entity\Ad;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
