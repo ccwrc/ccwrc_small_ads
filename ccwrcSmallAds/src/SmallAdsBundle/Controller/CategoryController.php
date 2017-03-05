@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 use SmallAdsBundle\Entity\Category;
+use SmallAdsBundle\Form\CategoryType;
 
 class CategoryController extends Controller {
 
@@ -17,10 +18,11 @@ class CategoryController extends Controller {
         $this->denyAccessUnlessGranted("ROLE_ADMIN", null, "Dostęp zabroniony");
 
         $category = new Category();
-        $form = $this->createFormBuilder($category)
-                ->setMethod("POST")
-                ->add("name", "text", ["label" => "Podaj nazwę kategorii: "])
-                ->getForm();
+        $form = $this->createForm(CategoryType::class, $category);
+//        $form = $this->createFormBuilder($category)
+//                ->setMethod("POST")
+//                ->add("name", "text", ["label" => "Podaj nazwę kategorii: "])
+//                ->getForm();
 
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
