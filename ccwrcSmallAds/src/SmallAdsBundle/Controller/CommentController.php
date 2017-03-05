@@ -10,6 +10,7 @@ use DateTime;
 use SmallAdsBundle\Entity\Comment;
 use SmallAdsBundle\Entity\User;
 use SmallAdsBundle\Form\CommentType;
+use SmallAdsBundle\Form\CommentEditType;
 
 class CommentController extends Controller {
 
@@ -24,9 +25,10 @@ class CommentController extends Controller {
         $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
         $comment = new Comment();
 
+        $commentForm = $this->createForm(CommentType::class, $comment, [
+            "action" => $this->generateUrl("smallads_comment_createcomment", ["id" => $id])
+        ]);
 
-     $commentForm = $this->createForm(CommentType::class, $comment, ["action" => $this->generateUrl("smallads_comment_createcomment", ["id" => $id])]);
-    
 //        $commentForm = $this->createFormBuilder($comment)
 //                ->setAction($this->generateUrl("smallads_comment_createcomment", ["id" => $id]))
 //                ->setMethod("POST")
@@ -66,11 +68,13 @@ class CommentController extends Controller {
         if ($user !== $comment->getUser()) {
             throw $this->createNotFoundException("Brak zgodności ID");
         }
+        
+        $commentForm = $this->createForm(CommentEditType::class, $comment);
 
-        $commentForm = $this->createFormBuilder($comment)
-                ->setMethod("POST")
-                ->add("text", "textarea", ["label" => "Edytuj komentarz: "])
-                ->getForm();
+//        $commentForm = $this->createFormBuilder($comment)
+//                ->setMethod("POST")
+//                ->add("text", "textarea", ["label" => "Edytuj komentarz: "])
+//                ->getForm();
 
         $commentForm->handleRequest($req);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
