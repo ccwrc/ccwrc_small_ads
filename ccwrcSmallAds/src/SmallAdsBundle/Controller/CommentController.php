@@ -29,12 +29,6 @@ class CommentController extends Controller {
             "action" => $this->generateUrl("smallads_comment_createcomment", ["id" => $id])
         ]);
 
-//        $commentForm = $this->createFormBuilder($comment)
-//                ->setAction($this->generateUrl("smallads_comment_createcomment", ["id" => $id]))
-//                ->setMethod("POST")
-//                ->add("text", "text", ["label" => "Skomentuj: "])
-//                ->getForm();
-
         $commentForm->handleRequest($req);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $comment = $commentForm->getData();
@@ -68,13 +62,8 @@ class CommentController extends Controller {
         if ($user !== $comment->getUser()) {
             throw $this->createNotFoundException("Brak zgodności ID");
         }
-        
-        $commentForm = $this->createForm(CommentEditType::class, $comment);
 
-//        $commentForm = $this->createFormBuilder($comment)
-//                ->setMethod("POST")
-//                ->add("text", "textarea", ["label" => "Edytuj komentarz: "])
-//                ->getForm();
+        $commentForm = $this->createForm(CommentEditType::class, $comment);
 
         $commentForm->handleRequest($req);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
