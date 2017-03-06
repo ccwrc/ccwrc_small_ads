@@ -7,7 +7,7 @@ Baza danych: MySQL z pośrednictwem Doctrine ORM.
 Komunikacja mailowa z użytkownikami: Swiftmailer.
 
 # Wprowadzone funkcjonalności: 
-        - rejestracja/edycja użytkowników i administratorów
+        - rejestracja/edycja użytkowników i administratorów,
         - zarządzanie kategoriami tematycznymi, 
         - dodawanie/usuwanie/edycja ogłoszeń ze zdjęciem,
         - elastyczny wybór daty wygaśnięcia ogłoszenia (od +3 do +7 dni),
