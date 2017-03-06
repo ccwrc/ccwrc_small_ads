@@ -158,7 +158,7 @@ class AdController extends Controller {
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
         $user = $this->container->get("security.context")->getToken()->getUser();
         $ad = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->find($id);
-       
+
         if ($user === $ad->getUser()) {
             if ($ad->getPhotoPath()) {
                 $photoToDelete = $this->getParameter("uploads_img") . "/" . $ad->getPhotoPath();
