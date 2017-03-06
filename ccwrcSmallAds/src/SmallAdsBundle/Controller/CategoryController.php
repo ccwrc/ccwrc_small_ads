@@ -82,7 +82,11 @@ class CategoryController extends Controller {
         if ($category == null) {
             throw $this->createNotFoundException("Brak ID w bazie");
         }
-    //TODO dodac poxniej ifa -> nie jesli sa ogloszenia aktywne
+
+        if (count($category->getAds()) > 0) {
+            throw $this->createNotFoundException("Operacja zabroniona");
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($category);
         $em->flush();
