@@ -144,7 +144,7 @@ class AdController extends Controller {
     public function showAllAdsByUserAction() {
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Dostęp zabroniony');
         $user = $this->container->get("security.context")->getToken()->getUser();
-        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findByUser($user);
+        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAllAdsByUser($user);
 
         return $this->render('SmallAdsBundle:Ad:show_all_ads_by_user.html.twig', array(
                     "ads" => $ads

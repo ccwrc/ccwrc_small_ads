@@ -7,8 +7,9 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: pl
+    locale: pl 
     uploads_img: '%kernel.root_dir%/../web/bundles/SmallAdsBundle/uploads_img'
+    # powyższe dane znajdują się już w pliku parameters.yml
 
 framework:
     #esi:             ~

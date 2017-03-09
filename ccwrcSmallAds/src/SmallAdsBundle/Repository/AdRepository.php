@@ -47,5 +47,12 @@ class AdRepository extends EntityRepository {
                 . ' > a.endDate ORDER BY a.endDate DESC');
         return $query->getResult();
     }
+    
+    public function findAllAdsByUser($user) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT a FROM SmallAdsBundle:Ad a WHERE a.user = :user ORDER'
+                        . ' BY a.endDate DESC')->setParameter('user', $user);
+        return $query->getResult();
+    }
 
 }
