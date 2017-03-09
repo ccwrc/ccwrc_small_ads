@@ -11,7 +11,8 @@
     <hr/>
 
     {% for ad in ads %}
-        ({{ ad.category }})
+        [Kategoria: {{ ad.category }}] <b> Sprzedający: {{ ad.user }} </b>
+        [{{ ad.endDate.date | date("d/m/Y H:i:s") }}]
         <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }}</a>
         <hr/>
     {% else %}
