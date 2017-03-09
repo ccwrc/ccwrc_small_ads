@@ -190,5 +190,17 @@ class AdController extends Controller {
                     "ads" => $ads
         ));
     }
+    
+    /**
+     * @Route("/{adName}/findAdByPieceOfName")
+     */
+    public function findAdByPieceOfNameAction($adName) { // w trakcie
+        $this->denyAccessUnlessGranted("ROLE_ADMIN", null, "Dostęp zabroniony");
+        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAdByPieceOfName($adName);
+
+        return $this->render('SmallAdsBundle:Ad:show_all_archiv_ads.html.twig', array(
+                    "ads" => $ads
+        ));
+    }
 
 }
