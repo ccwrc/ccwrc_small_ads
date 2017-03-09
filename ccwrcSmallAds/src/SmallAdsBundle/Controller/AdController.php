@@ -11,6 +11,7 @@ use SmallAdsBundle\Entity\Ad;
 use SmallAdsBundle\Entity\User;
 use SmallAdsBundle\Form\AdType;
 use SmallAdsBundle\Form\AdEditType;
+use SmallAdsBundle\Form\AdFindType;
 
 class AdController extends Controller {
 
@@ -192,14 +193,25 @@ class AdController extends Controller {
     }
     
     /**
-     * @Route("/{adName}/findAdByPieceOfName")
+     * @Route("/findAdByPieceOfName")
      */
-    public function findAdByPieceOfNameAction($adName) { // w trakcie
+    public function findAdByPieceOfNameAction(Request $req) {
         $this->denyAccessUnlessGranted("ROLE_ADMIN", null, "Dostęp zabroniony");
-        $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAdByPieceOfName($adName);
+        $ad = new Ad();
+        $form = $this->createForm(AdFindType::class, $ad);
 
-        return $this->render('SmallAdsBundle:Ad:show_all_archiv_ads.html.twig', array(
-                    "ads" => $ads
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $adName = $form->getData()->getTitle();
+            $ads = $this->getDoctrine()->getRepository("SmallAdsBundle:Ad")->findAdByPieceOfName($adName);
+
+            return $this->render('SmallAdsBundle:Ad:find_ad_by_piece_of_name.html.twig', array(
+                        "ads" => $ads
+            ));
+        }
+
+        return $this->render('SmallAdsBundle:Ad:find_ad_form.html.twig', array(
+                    "form" => $form->createView()
         ));
     }
 

@@ -1,0 +1,22 @@
+{% extends "SmallAdsBundle:Main:base.html.twig" %}
+
+{% block title %}small ads - wyszukane ogłoszenia{% endblock %}
+
+{% block body %}
+
+    {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
+    {% include 'SmallAdsBundle:Category:admin_menu.html.twig' %}
+
+    <h2>Wyszukane ogłoszenia:</h2>
+    <hr/>
+
+    {% for ad in ads %}
+        [Kategoria: {{ ad.category }}] <b> Sprzedający: {{ ad.user }} </b>
+        [{{ ad.endDate.date | date("d/m/Y H:i:s") }}]
+        <a href="{{ path("smallads_ad_showad", {"id":ad.id}) }}">{{ ad.title }}</a>
+        <hr/>
+    {% else %}
+        Brak ogłoszeń o podanym tytule.
+    {% endfor %}
+
+{% endblock %}

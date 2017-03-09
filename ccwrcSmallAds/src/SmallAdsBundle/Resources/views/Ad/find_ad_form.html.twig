@@ -1,21 +1,21 @@
 {% extends "SmallAdsBundle:Main:base.html.twig" %}
 
-{% block title %}small ads - nowa kategoria{% endblock %}
+{% block title %}small ads - wyszukiwanie ogłoszeń{% endblock %}
 
 {% block body %}
 
     {% include 'SmallAdsBundle:Ad:ad_menu.html.twig' %}
     {% include 'SmallAdsBundle:Category:admin_menu.html.twig' %}
 
-    <h2>Nowa kategoria</h2>
+    <h2>Wyszukiwanie ogłoszenia</h2>
     <hr/>
 
     <div class="form-inline">
         <div class="form-group">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
+            {{ form_start(form) }} 
+            {{ form_widget(form) }} 
         </div>
-        <input class="btn btn-primary btn-sm" type="submit" value="Dodaj"/>
+        <input class="btn btn-primary btn-sm" type="submit" value="Wyszukaj"/>
     </div>
     {{ form_end(form) }}
 
