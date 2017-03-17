@@ -4,7 +4,7 @@ Mini serwis lokalnych ogłoszeń drobnych. Projekt napisany przy użyciu Symfony
 
 Zarządzanie użytkownikami: pakiet security + FOSUserBundle.    
 Baza danych: MySQL z pośrednictwem Doctrine ORM.    
-Komunikacja mailowa z uzytkownikiem: Swiftmailer.    
+Komunikacja mailowa z użytkownikiem: Swiftmailer.    
 Stylizacja: Bootstrap.    
 
 # Wprowadzone funkcjonalności: 
